@@ -62,7 +62,7 @@ https://irtgold.github.io
   Master Sheet  Google Drive  ← สลิป + ไฟล์สินค้า (private)
      │
      ▼
-  หน้า Admin (มือถือ)         ← /dev?admin=<token>
+  หน้าจัดการหลังบ้าน          ← แยกต่างหาก เฉพาะเจ้าของบัญชี
 ```
 
 **หลักการ:** เว็บเป็นแค่หน้าบ้าน · ตรรกะและข้อมูลทั้งหมดอยู่ที่ Apps Script + Google Sheet
