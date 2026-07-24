@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ตรวจสอบสถานะ | IRT GOLD</title>
+  <meta name="description" content="ตรวจสอบสถานะการลงทะเบียนและ License Key ของ IRT GOLD" />
+  <link rel="icon" href="../assets/img/irt2.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/config.js"></script>
+</head>
+
+<body>
+
+<div class="page-bg">
+
+  <div class="hero text-white pt-12 pb-28 px-4">
+    <div class="max-w-xl mx-auto text-center">
+      <div class="hero-badge mb-3"><img src="../assets/img/irt2.png" alt="IRT GOLD" /></div>
+      <p class="hero-brand mb-4">IRT GOLD</p>
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">ตรวจสอบสถานะ</h1>
+      <p class="text-blue-200/80">เช็คสถานะการลงทะเบียนและ License Key ของคุณ</p>
+    </div>
+  </div>
+
+  <div class="max-w-xl mx-auto px-4 pb-14 -mt-20 relative z-10">
+
+    <div class="card overflow-hidden">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <span class="section-title">กรอกข้อมูลเพื่อค้นหา</span>
+      </div>
+      <div class="p-6">
+        <div class="space-y-5">
+          <div>
+            <label class="lbl">อีเมลที่ใช้ลงทะเบียน <span class="text-red-500">*</span></label>
+            <input type="email" id="email" class="inp" placeholder="your@email.com" />
+            <p id="email-hint" class="field-hint"></p>
+          </div>
+          <div>
+            <label class="lbl">เลขบัญชี MT5 <span class="text-slate-400 font-normal text-xs">(สำหรับ PC / Combo)</span></label>
+            <input type="text" id="mt5" inputmode="numeric" class="inp" placeholder="301054" />
+            <p id="mt5-hint" class="field-hint"></p>
+          </div>
+          <div>
+            <label class="lbl">TradingView Username <span class="text-slate-400 font-normal text-xs">(สำหรับ Mobile)</span></label>
+            <input type="text" id="tradingview" class="inp" placeholder="IRTGOLD" />
+            <p id="tv-hint" class="field-hint"></p>
+          </div>
+          <p class="text-xs text-slate-500">กรอกอย่างใดอย่างหนึ่ง — MT5 หรือ TradingView ก็ได้</p>
+        </div>
+
+        <div id="error-msg" class="hidden mt-5 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200 text-sm"></div>
+
+        <button type="button" id="submit-btn" onclick="handleCheck()" class="btn-primary pulse-glow mt-6">
+          <i data-icon="search" data-size="17"></i>ตรวจสอบสถานะ
+        </button>
+      </div>
+    </div>
+
+    <!-- ผลลัพธ์ -->
+    <div id="result-card" class="hidden card overflow-hidden mt-5">
+      <div id="result-header" class="p-6 text-white text-center">
+        <p id="result-icon" class="text-4xl mb-1"></p>
+        <h3 id="result-title" class="font-bold text-xl"></h3>
+      </div>
+      <div class="p-6">
+        <div id="result-details" class="bg-slate-50 rounded-xl border border-slate-200 divide-y divide-slate-200 mb-4"></div>
+        <p id="result-note" class="text-sm text-slate-600 text-center"></p>
+      </div>
+    </div>
+
+    <div class="card p-6 mt-5 text-center">
+      <p class="text-sm text-slate-500 mb-4">มีปัญหาการใช้งาน? ทีมงานพร้อมช่วยเหลือ</p>
+      <a id="c-line" href="#" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-bold transition shadow-md">
+        <i data-icon="line" data-size="17"></i>ติดต่อทีมงานทาง LINE
+      </a>
+    </div>
+  </div>
+
+  <footer class="gradient-bg text-white py-6">
+    <div class="max-w-xl mx-auto px-4 flex items-center justify-center gap-3">
+      <img src="../assets/img/irt2.png" alt="IRT GOLD" class="w-9 h-9 rounded-lg" />
+      <p class="text-blue-200/70 text-sm">© 2025 IRT GOLD. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="../assets/js/form.js"></script>
+<script>
+  IRT.hydrateIcons();   // แปลง <i data-icon> ทั้งหน้าเป็น SVG
+  document.getElementById('c-line').href = IRT_CONFIG.CONTACT.line;
+
+  const STATUS_STYLE = {
+    approved: { bg: 'linear-gradient(135deg,#16a34a,#15803d)', icon: 'check', title: 'อนุมัติแล้ว',       note: 'License Key ถูกส่งไปที่อีเมลของคุณเรียบร้อยแล้ว หากไม่พบ กรุณาเช็คกล่อง Spam' },
+    pending:  { bg: 'linear-gradient(135deg,#f59e0b,#d97706)', icon: 'clock', title: 'รอตรวจสอบ',         note: 'ทีมงานกำลังตรวจสอบสลิปของคุณ ปกติใช้เวลา 15-60 นาที' },
+    rejected: { bg: 'linear-gradient(135deg,#ef4444,#dc2626)', icon: 'alert', title: 'ไม่ผ่านการตรวจสอบ', note: 'กรุณาติดต่อทีมงานทาง LINE เพื่อสอบถามรายละเอียด' },
+    notfound: { bg: 'linear-gradient(135deg,#64748b,#475569)', icon: 'search', title: 'ไม่พบข้อมูล',        note: 'ไม่พบการลงทะเบียนด้วยอีเมลและเลขบัญชีนี้ กรุณาตรวจสอบอีกครั้ง หรือติดต่อทีมงาน' }
+  };
+
+  async function handleCheck() {
+    IRT.hideError();
+    document.getElementById('result-card').classList.add('hidden');
+
+    const email       = document.getElementById('email').value.trim().toLowerCase();
+    const mt5         = document.getElementById('mt5').value.trim();
+    const tradingview = document.getElementById('tradingview').value.trim();
+
+    const eChk = IRT.validEmail(email);
+    if (!eChk.ok) return IRT.showError('อีเมล: ' + eChk.msg);
+
+    if (!mt5 && !tradingview) {
+      return IRT.showError('กรุณากรอกเลขบัญชี MT5 หรือ TradingView Username อย่างน้อย 1 อย่าง');
+    }
+
+    IRT.setLoading('submit-btn', true);
+    try {
+      const result = await IRT.send('check', { email, mt5, tradingview });
+      renderResult(result);
+    } catch (err) {
+      IRT.showError('เกิดข้อผิดพลาด: ' + err.message);
+    }
+    IRT.setLoading('submit-btn', false);
+  }
+
+  function renderResult(r) {
+    const key = r.found ? (r.status || 'pending') : 'notfound';
+    const s   = STATUS_STYLE[key] || STATUS_STYLE.pending;
+
+    document.getElementById('result-header').style.background = s.bg;
+    document.getElementById('result-icon').innerHTML = IRT.icon(s.icon, 40);
+    document.getElementById('result-title').textContent = s.title;
+    document.getElementById('result-note').textContent  = s.note;
+
+    const box = document.getElementById('result-details');
+    if (r.found) {
+      const c = r.customer || {};
+      const rows = [
+        ['ชื่อ',            c.name         || '—'],
+        ['สินค้า',          c.product      || '—'],
+        ['เวอร์ชัน',        c.version      || '—'],
+        ['วันที่ลงทะเบียน',  c.registerDate || '—'],
+        ['วันหมดอายุ',      c.expiryDate   || '—']
+      ];
+      // แสดง Key เฉพาะ 4 ตัวท้าย เพื่อความปลอดภัย
+      if (c.licenseKeyMasked) rows.push(['License Key', c.licenseKeyMasked]);
+
+      box.innerHTML = rows.map(([k, v]) => `
+        <div class="flex justify-between items-center gap-4 p-3.5">
+          <span class="text-sm text-slate-500 flex-shrink-0">${k}</span>
+          <span class="font-semibold text-right break-all text-sm">${v}</span>
+        </div>`).join('');
+      box.classList.remove('hidden');
+    } else {
+      box.classList.add('hidden');
+    }
+
+    document.getElementById('result-card').classList.remove('hidden');
+    document.getElementById('result-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  IRT.bindCheck('email',       'email-hint', IRT.validEmail);
+  IRT.bindCheck('mt5',         'mt5-hint',   IRT.validMT5);
+  IRT.bindCheck('tradingview', 'tv-hint',    IRT.validTV);
+</script>
+
+</body>
+</html>

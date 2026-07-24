@@ -1,0 +1,774 @@
+/* =========================================================
+   IRT GOLD — Shared Theme  (Navy Blue Edition)
+   ใช้ร่วมกันทุกหน้า (index / register / update / check)
+   ========================================================= */
+
+:root {
+  /* น้ำเงินเข้ม — สีหลักของแบรนด์ */
+  --navy-900: #0f1f3d;
+  --navy-800: #16294f;
+  --navy-700: #1e3a6b;
+  --navy-600: #27508c;
+
+  /* ฟ้า — สีเน้น ปุ่ม และ step */
+  --blue-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
+
+  /* พื้นหลังและเส้นขอบ */
+  --page:     #eef2f8;
+  --card:     #ffffff;
+  --line:     #e5ebf3;
+  --ink:      #1a2b4a;
+  --ink-soft: #64748b;
+
+  --green:    #138f2d;
+  --amber:    #f59e0b;
+
+  /* ทอง — สีเน้นพรีเมียมของแบรนด์ */
+  --gold-300: #f0d68a;
+  --gold-400: #dcb85a;
+  --gold-500: #c9a227;
+  --gold-600: #a8841c;
+  --gold-line: rgba(201, 162, 39, 0.35);
+}
+
+/* ---------- ไอคอนเส้น ---------- */
+.icon {
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ไอคอนที่แทรกกลางข้อความ */
+.ico {
+  display: inline-flex;
+  vertical-align: -0.18em;
+  margin-right: 0.4rem;
+  color: currentColor;
+}
+
+/* ไอคอนที่อยู่เดี่ยว ๆ (เช่นในวงกลม) — ตัดระยะห่างออก ให้อยู่กึ่งกลางพอดี */
+.ico:only-child {
+  margin-right: 0;
+  vertical-align: middle;
+}
+
+.ico-gold  { color: var(--gold-500); }
+.ico-amber { color: #b45309; }
+.ico-blue  { color: var(--blue-600); }
+
+.gold-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+}
+
+body {
+  font-family: 'Sarabun', sans-serif;
+  background: var(--page);
+  color: var(--ink);
+}
+
+/* ---------- พื้นหลังหน้า ---------- */
+.page-bg {
+  background: var(--page);
+  min-height: 100vh;
+}
+
+/* ---------- Hero น้ำเงินเข้ม ---------- */
+.hero {
+  background: linear-gradient(165deg, var(--navy-900) 0%, #1a3159 50%, var(--navy-600) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hero::before { width: 320px; height: 320px; top: -140px;   left: -100px; }
+.hero::after  { width: 420px; height: 420px; bottom: -220px; right: -120px; }
+
+.hero > * { position: relative; z-index: 1; }
+
+/* โลโก้ในหัวเรื่อง — กรอบสี่เหลี่ยมมนแบบในดีไซน์ */
+.hero-badge {
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  backdrop-filter: blur(6px);
+}
+
+.hero-badge img { width: 46px; height: 46px; object-fit: contain; }
+
+.hero-brand {
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ยังคงชื่อเดิมไว้ให้ส่วนที่อ้างอิงอยู่ใช้งานได้ */
+.gradient-bg {
+  background: linear-gradient(165deg, var(--navy-900) 0%, #1a3159 50%, var(--navy-600) 100%);
+}
+
+.kbank-gradient {
+  background: linear-gradient(135deg, #138f2d 0%, #0a7b24 50%, #065e1b 100%);
+}
+
+/* ---------- การ์ด ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(16, 35, 70, 0.06), 0 8px 24px rgba(16, 35, 70, 0.04);
+}
+
+.glass { /* ชื่อเดิม — ให้ผลเหมือน .card */
+  background: var(--card);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(16, 35, 70, 0.06), 0 8px 24px rgba(16, 35, 70, 0.04);
+}
+
+/* หัวข้อในการ์ด : [01] ข้อมูลติดต่อ */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.15rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--navy-700);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+/* ---------- แถบขั้นตอน ---------- */
+.steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 17px;
+  left: 16%;
+  right: 16%;
+  height: 2px;
+  background: var(--line);
+  z-index: 0;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  text-align: center;
+}
+
+.step-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  background: #eef2f8;
+  color: #94a3b8;
+  border: 2px solid var(--line);
+}
+
+.step-dot.done,
+.step-dot.current {
+  background: var(--blue-600);
+  border-color: var(--blue-600);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.step-dot.todo { background: #eef2f8; }
+
+.step-label      { font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); }
+.step.on .step-label { color: var(--ink); }
+
+/* ---------- ฟอร์ม ---------- */
+.lbl {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.inp {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #dbe3ee;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1rem;
+  color: var(--ink);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.inp::placeholder { color: #b4c0d1; }
+
+.inp:focus,
+.input-focus:focus {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+  border-color: var(--blue-600);
+  outline: none;
+}
+
+.inp-center { text-align: center; font-size: 1.1rem; letter-spacing: 0.08em; }
+
+.input-ok  { border-color: #22c55e !important; background-color: #f0fdf4; }
+.input-bad { border-color: #ef4444 !important; background-color: #fef2f2; }
+
+.field-hint {
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  display: none;
+}
+
+.field-hint.show { display: flex; align-items: center; gap: 0.35rem; }
+.field-hint.ok   { color: #16a34a; }
+.field-hint.bad  { color: #dc2626; }
+.field-hint .icon { flex-shrink: 0; }
+
+/* กล่อง error ให้ไอคอนอยู่ระดับเดียวกับข้อความ */
+#error-msg, #found-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+#error-msg.hidden, #found-error.hidden { display: none; }
+#error-msg .icon, #found-error .icon { flex-shrink: 0; margin-top: 1px; }
+
+.optional {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #94a3b8;
+  float: right;
+}
+
+/* กล่องคำแนะนำ */
+.note {
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+.note-blue  { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+.note-amber { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+.note-green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; }
+
+/* ---------- ปุ่ม ---------- */
+.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue-600) 0%, var(--blue-700) 100%);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.32);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.4);
+}
+
+.btn-green {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  box-shadow: 0 6px 18px rgba(22, 163, 74, 0.32);
+}
+
+.btn-ghost {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: background 0.15s;
+}
+
+.btn-ghost:hover { background: #eef2f8; }
+
+.copy-btn:active { transform: scale(0.95); }
+
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ---------- การ์ดเลือกแพ็กเกจ ---------- */
+.pkg-card {
+  cursor: pointer;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  transition: all 0.18s ease;
+  position: relative;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem;
+}
+
+.pkg-card:hover {
+  border-color: var(--blue-500);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.14);
+}
+
+.pkg-card.selected {
+  border-color: var(--blue-600);
+  background: var(--blue-50);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.18);
+}
+
+.pkg-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  width: 30px;
+  height: 30px;
+  background: var(--blue-600);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+/* กรอบไอคอนสินค้า — เส้นทองบนพื้นน้ำเงินเข้ม */
+.pkg-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 13px;
+  background: linear-gradient(155deg, #16294f 0%, #24467d 100%);
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  color: var(--gold-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(15, 31, 61, 0.22);
+}
+
+.pkg-card.selected .pkg-icon {
+  border-color: var(--gold-400);
+  box-shadow: 0 6px 20px rgba(15, 31, 61, 0.3);
+}
+
+/* ป้าย BEST SELLER — ทองล้วน ไม่ฉูดฉาด */
+.badge-hot {
+  display: inline-block;
+  background: linear-gradient(100deg, var(--gold-500), var(--gold-400));
+  color: #1a1405;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- การ์ดเมนู (หน้าหลัก) ---------- */
+.nav-tile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.35rem 1.5rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  transition: border-color .18s, transform .18s, box-shadow .18s;
+}
+
+.nav-tile:hover {
+  border-color: var(--gold-line);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 31, 61, 0.08);
+}
+
+.nav-tile .tile-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: #f4f7fc;
+  border: 1px solid var(--line);
+  color: var(--navy-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .18s, color .18s, border-color .18s;
+}
+
+.nav-tile:hover .tile-icon {
+  background: linear-gradient(155deg, #16294f, #24467d);
+  border-color: transparent;
+  color: var(--gold-300);
+}
+
+.nav-tile .tile-go {
+  margin-left: auto;
+  color: #c3ccda;
+  transition: color .18s, transform .18s;
+}
+
+.nav-tile:hover .tile-go {
+  color: var(--gold-500);
+  transform: translateX(3px);
+}
+
+/* ---------- สถิติใน hero ---------- */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.hero-stat b {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--gold-300);
+  line-height: 1.2;
+}
+
+.hero-stat span {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- รายการสิ่งที่ได้รับ ---------- */
+.perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.perk .icon { color: var(--gold-500); margin-top: 2px; }
+
+/* =========================================================
+   MOCKUP — จำลองหน้าจอจริง ให้ลูกค้าหาข้อมูลถูก
+   ========================================================= */
+
+.phone-mock {
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(16, 35, 70, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  user-select: none;
+}
+
+/* แถบสถานะบนสุดของมือถือ */
+.mock-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 1rem 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* ---- MT5 : ธีมสว่างแบบ iOS Settings ---- */
+.mock-mt5 { background: #f2f2f7; color: #1c1c1e; }
+
+.mock-mt5 .mock-status { background: #f2f2f7; color: #1c1c1e; }
+
+.mock-mt5-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.3rem 0 0.7rem;
+  background: #f2f2f7;
+}
+
+.mock-mt5-acct {
+  background: #fff;
+  padding: 1rem 0.9rem;
+  text-align: center;
+  border-top: 1px solid #e2e2e7;
+  border-bottom: 1px solid #e2e2e7;
+}
+
+.mock-mt5-name   { font-size: 0.9rem;  font-weight: 600; }
+.mock-mt5-broker { font-size: 0.78rem; color: #6b6b70; margin-top: 0.15rem; }
+.mock-mt5-server { font-size: 0.72rem; color: #6b6b70; margin-top: 0.5rem; }
+
+/* บรรทัดที่ต้องการเน้น — เลขบัญชี */
+.mock-mt5-line {
+  font-size: 0.82rem;
+  margin-top: 0.35rem;
+  font-weight: 600;
+}
+
+.mock-hl {
+  background: #fde68a;
+  border-radius: 5px;
+  padding: 0.1rem 0.35rem;
+  font-weight: 800;
+  color: #92400e;
+  box-shadow: 0 0 0 2px #fbbf24;
+}
+
+.mock-mt5-rows { background: #fff; }
+
+.mock-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  border-top: 1px solid #eeeef0;
+  font-size: 0.82rem;
+}
+
+.mock-row-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.mock-row-chev { margin-left: auto; color: #c7c7cc; font-size: 0.8rem; }
+
+/* ---- TradingView : ธีมมืดตามแอปจริง ---- */
+.mock-tv { background: #0c0c0c; color: #fff; }
+
+.mock-tv .mock-status { background: #0c0c0c; color: #fff; }
+
+.mock-tv-bar {
+  text-align: center;
+  padding: 0.2rem 0 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #d1d5db;
+}
+
+.mock-tv-profile {
+  background: #1c1c1c;
+  border-radius: 12px;
+  margin: 0 0.75rem;
+  padding: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.mock-tv-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mock-tv-avatar img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+
+.mock-tv-user { font-size: 1.05rem; font-weight: 700; }
+
+.mock-tv-premium {
+  display: inline-block;
+  margin-top: 0.3rem;
+  background: #3a3a3a;
+  color: #e5e7eb;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.12rem 0.5rem;
+  border-radius: 4px;
+}
+
+.mock-tv-stats {
+  display: flex;
+  background: #1c1c1c;
+  border-radius: 12px;
+  margin: 0.6rem 0.75rem 0.9rem;
+  padding: 0.75rem 0;
+}
+
+.mock-tv-stat { flex: 1; text-align: center; }
+.mock-tv-stat b    { display: block; font-size: 0.95rem; }
+.mock-tv-stat span { font-size: 0.65rem; color: #9ca3af; }
+
+.mock-tv-rows { padding: 0 0.75rem 0.8rem; }
+
+.mock-tv-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.25rem;
+  font-size: 0.8rem;
+  color: #d1d5db;
+  border-bottom: 1px solid #262626;
+}
+
+/* คำอธิบายใต้ mockup */
+.mock-caption {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-top: 0.85rem;
+}
+
+.mock-caption b { color: var(--amber); }
+
+/* ---------- อื่น ๆ ---------- */
+.pulse-glow { animation: pulse-glow 2.4s ease-in-out infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 6px 18px rgba(37, 99, 235, 0.32); }
+  50%      { box-shadow: 0 6px 28px rgba(37, 99, 235, 0.55); }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-top: 2px dashed var(--line);
+}
+
+.divider span {
+  padding: 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+/* =========================================================
+   RESPONSIVE — มือถือ
+   ========================================================= */
+@media (max-width: 480px) {
+
+  /* การ์ดแพ็กเกจ : ราคาลงมาอยู่บรรทัดล่าง ไม่เบียดชื่อสินค้า */
+  .pkg-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      'icon name'
+      'icon price';
+    gap: 0.25rem 0.85rem;
+    padding: 1rem;
+    align-items: center;
+  }
+
+  .pkg-card > :first-child { grid-area: icon; }
+  .pkg-card > :nth-child(2) { grid-area: name; }
+  .pkg-card > :last-child   { grid-area: price; text-align: left !important; }
+
+  .pkg-card > :last-child p:first-child { display: inline; margin-right: 0.5rem; }
+  .pkg-card > :last-child p:last-child  { display: inline; }
+
+  .pkg-icon { width: 50px; height: 50px; border-radius: 11px; }
+
+  .pkg-card.selected::after { top: -8px; right: -8px; width: 26px; height: 26px; font-size: 0.8rem; }
+
+  /* แถบขั้นตอน : ตัวหนังสือเล็กลงกันตกบรรทัด */
+  .step-label { font-size: 0.68rem; line-height: 1.3; }
+  .step-dot   { width: 32px; height: 32px; font-size: 0.82rem; }
+  .steps::before { top: 15px; left: 18%; right: 18%; }
+
+  /* หัวข้อการ์ด */
+  .section-head { padding: 1rem 1.15rem; }
+  .section-num  { width: 30px; height: 30px; font-size: 0.78rem; }
+  .section-title { font-size: 0.98rem; }
+
+  /* สถิติใน hero */
+  .hero-stats { gap: 1.5rem; }
+  .hero-stat b { font-size: 1.2rem; }
+  .hero-stat span { font-size: 0.65rem; }
+
+  /* mockup ไม่ให้ล้นจอ */
+  .phone-mock { max-width: 100%; }
+
+  /* กล่องติดต่อ : เรียงลงมาเป็นแถว */
+  #contact-list .nav-tile { min-width: 100% !important; }
+
+  .nav-tile { padding: 1.1rem 1.15rem; }
+}

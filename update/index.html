@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>อัปเดตเวอร์ชัน | IRT GOLD V.8.0</title>
+  <meta name="description" content="ลูกค้าเก่า IRT GOLD อัปเดตเป็นเวอร์ชัน 8.0 ฟรี" />
+  <link rel="icon" href="../assets/img/irt2.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <script src="../assets/js/config.js"></script>
+</head>
+
+<body>
+
+<!-- ============ ฟอร์มค้นหา ============ -->
+<div id="main-page" class="page-bg">
+
+  <div class="hero text-white pt-12 pb-28 px-4">
+    <div class="max-w-xl mx-auto text-center">
+      <div class="hero-badge mb-3"><img src="../assets/img/irt2.png" alt="IRT GOLD" /></div>
+      <p class="hero-brand mb-4">IRT GOLD</p>
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">อัปเดตเวอร์ชัน</h1>
+      <p class="text-blue-200/80">สำหรับลูกค้าเก่าที่เคยซื้อ IRT GOLD ไปแล้ว</p>
+    </div>
+  </div>
+
+  <div class="max-w-xl mx-auto px-4 pb-14 -mt-20 relative z-10">
+
+    <!-- แถบขั้นตอน -->
+    <div class="card p-5 mb-5">
+      <div class="steps">
+        <div class="step on"><div class="step-dot current">1</div><p class="step-label">ยืนยันตัวตน</p></div>
+        <div class="step"><div class="step-dot todo">2</div><p class="step-label">ตรวจสอบข้อมูล</p></div>
+        <div class="step"><div class="step-dot todo">3</div><p class="step-label">รับ Key ใหม่</p></div>
+      </div>
+    </div>
+
+    <!-- แจ้งฟรี -->
+    <div id="free-banner" class="card p-6 text-center mb-5" style="background:linear-gradient(135deg,#16a34a 0%,#15803d 100%);border:none">
+      <p class="mb-3 flex justify-center text-white/90"><i data-icon="star" data-size="34"></i></p>
+      <p class="font-extrabold text-2xl text-white">อัปเดตฟรี!</p>
+      <p class="text-green-50 text-sm mt-1">ลูกค้าเก่าอัปเกรดเป็น <span id="ver-label"></span> ไม่มีค่าใช้จ่าย</p>
+    </div>
+
+    <!-- ฟอร์ม -->
+    <div class="card overflow-hidden">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <span class="section-title">ยืนยันตัวตน</span>
+      </div>
+      <div class="p-6">
+        <p class="text-sm text-slate-500 mb-5">กรอกข้อมูลที่เคยใช้ตอนซื้อครั้งแรก เพื่อให้ระบบค้นหาประวัติของคุณ</p>
+
+        <div class="space-y-5">
+          <div>
+            <label class="lbl">อีเมลที่ใช้ตอนซื้อ <span class="text-red-500">*</span></label>
+            <input type="email" id="email" class="inp" placeholder="your@email.com" />
+            <p id="email-hint" class="field-hint"></p>
+          </div>
+          <div>
+            <label class="lbl">เลขบัญชี MT5</label>
+            <input type="text" id="mt5" inputmode="numeric" class="inp" placeholder="301054" />
+            <p id="mt5-hint" class="field-hint"></p>
+          </div>
+          <div>
+            <label class="lbl">TradingView Username</label>
+            <input type="text" id="tradingview" class="inp" placeholder="IRTGOLD" />
+            <p id="tv-hint" class="field-hint"></p>
+          </div>
+        </div>
+
+        <div id="error-msg" class="hidden mt-5 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200 text-sm"></div>
+
+        <button type="button" id="submit-btn" onclick="handleLookup()" class="btn-primary pulse-glow mt-6">
+          <i data-icon="search" data-size="17"></i>ค้นหาข้อมูลของฉัน
+        </button>
+
+        <div class="note note-blue mt-5">
+          <p class="font-bold mb-1"><i data-icon="info" data-size="15"></i>กรอกอย่างน้อย 2 อย่าง</p>
+          <p>อีเมล + เลขบัญชี MT5 <b>หรือ</b> อีเมล + TradingView Username เพื่อยืนยันว่าเป็นคุณจริง</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ติดต่อ -->
+    <div class="card p-6 mt-5 text-center">
+      <p class="font-bold mb-1"><i data-icon="help" data-size="15"></i>หาข้อมูลไม่เจอ?</p>
+      <p class="text-sm text-slate-500 mb-4">อาจใช้อีเมลคนละอันตอนซื้อ ทักหาทีมงานได้เลย</p>
+      <a id="c-line" href="#" target="_blank" rel="noopener"
+        class="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-bold transition shadow-md">
+        <i data-icon="line" data-size="17"></i>ติดต่อทีมงานทาง LINE
+      </a>
+    </div>
+
+    <p class="text-center text-sm text-slate-500 mt-6">
+      ยังไม่เคยซื้อ IRT GOLD?
+      <a href="../register/" class="text-blue-600 font-bold hover:underline">ลงทะเบียนซื้อที่นี่ →</a>
+    </p>
+  </div>
+
+  <footer class="gradient-bg text-white py-6">
+    <div class="max-w-xl mx-auto px-4 flex items-center justify-center gap-3">
+      <img src="../assets/img/irt2.png" alt="IRT GOLD" class="w-9 h-9 rounded-lg" />
+      <p class="text-blue-200/70 text-sm">© 2025 IRT GOLD. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ เจอข้อมูล — ยืนยัน ============ -->
+<div id="found-page" class="hidden page-bg">
+  <div class="hero text-white pt-12 pb-28 px-4">
+    <div class="max-w-lg mx-auto text-center">
+      <div class="hero-badge mb-3"><img src="../assets/img/irt2.png" alt="IRT GOLD" /></div>
+      <p class="hero-brand">IRT GOLD</p>
+    </div>
+  </div>
+
+  <div class="max-w-lg mx-auto px-4 pb-14 -mt-20 relative z-10">
+    <div class="card p-5 mb-5">
+      <div class="steps">
+        <div class="step on"><div class="step-dot done">1</div><p class="step-label">ยืนยันตัวตน</p></div>
+        <div class="step on"><div class="step-dot current">2</div><p class="step-label">ตรวจสอบข้อมูล</p></div>
+        <div class="step"><div class="step-dot todo">3</div><p class="step-label">รับ Key ใหม่</p></div>
+      </div>
+    </div>
+
+    <div class="card p-7">
+      <div class="text-center mb-6">
+        <div id="found-icon" class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-700"><i data-icon="check" data-size="30"></i></div>
+        <h2 id="found-title" class="text-xl font-bold">เจอข้อมูลของคุณแล้ว!</h2>
+        <p id="found-sub" class="text-slate-500 text-sm mt-1">กรุณาตรวจสอบความถูกต้องก่อนยืนยัน</p>
+      </div>
+
+      <div id="found-details" class="bg-slate-50 rounded-xl border border-slate-200 divide-y divide-slate-200 mb-5"></div>
+
+      <div id="found-note" class="note note-amber mb-5">
+        <p class="font-bold"><i data-icon="alert" data-size="15"></i>ข้อมูลไม่ถูกต้อง?</p>
+        <p class="mt-1">ถ้าเลขบัญชี MT5 หรือ TradingView ผิด <b>อย่ากดยืนยัน</b> — ติดต่อทีมงานทาง LINE เพื่อแก้ไขก่อน</p>
+      </div>
+
+      <div id="found-error" class="hidden mb-4 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200 text-sm"></div>
+
+      <button type="button" id="confirm-btn" onclick="handleConfirm()" class="btn-primary btn-green">
+        ยืนยัน — ขอรับเวอร์ชันใหม่
+      </button>
+      <button type="button" onclick="location.reload()" class="btn-ghost mt-2">← ค้นหาใหม่</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ สำเร็จ ============ -->
+<div id="success-page" class="hidden page-bg">
+  <div class="hero text-white pt-12 pb-28 px-4">
+    <div class="max-w-lg mx-auto text-center">
+      <div class="hero-badge mb-3"><img src="../assets/img/irt2.png" alt="IRT GOLD" /></div>
+      <p class="hero-brand">IRT GOLD</p>
+    </div>
+  </div>
+
+  <div class="max-w-lg mx-auto px-4 pb-14 -mt-20 relative z-10">
+    <div class="card p-5 mb-5">
+      <div class="steps">
+        <div class="step on"><div class="step-dot done">1</div><p class="step-label">ยืนยันตัวตน</p></div>
+        <div class="step on"><div class="step-dot done">2</div><p class="step-label">ตรวจสอบข้อมูล</p></div>
+        <div class="step on"><div class="step-dot current">3</div><p class="step-label">รับ Key ใหม่</p></div>
+      </div>
+    </div>
+
+    <div class="card p-8 text-center">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 text-green-700"><i data-icon="check" data-size="38"></i></div>
+      <h2 id="done-title" class="text-2xl font-bold mb-1">ส่งคำขอเรียบร้อย!</h2>
+      <p id="done-sub" class="text-slate-500 mb-6">ทีมงานจะส่งไฟล์และ License Key ใหม่ไปที่อีเมลของคุณ</p>
+
+      <div class="note note-blue text-left mb-6">
+        <p class="font-bold mb-1"><i data-icon="mail" data-size="15"></i>อีเมลปลายทาง</p>
+        <p id="success-email" class="font-bold break-all"></p>
+        <p class="text-xs mt-2 opacity-80">ปกติใช้เวลา 15-60 นาที หากไม่ได้รับ กรุณาเช็คในกล่อง Spam</p>
+      </div>
+
+      <a href="../" class="btn-primary block text-center"><i data-icon="home" data-size="17"></i>กลับหน้าหลัก</a>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/form.js"></script>
+<script>
+  let foundCustomer = null;
+
+  IRT.hydrateIcons();   // แปลง <i data-icon> ทั้งหน้าเป็น SVG
+
+  document.getElementById('ver-label').textContent = IRT_CONFIG.VERSION;
+  document.getElementById('c-line').href = IRT_CONFIG.CONTACT.line;
+
+  // ถ้าตั้งค่าให้อัปเกรดมีค่าใช้จ่าย ให้เปลี่ยนแบนเนอร์
+  if (IRT_CONFIG.UPGRADE_PRICE > 0) {
+    document.getElementById('free-banner').innerHTML =
+      `<p class="mb-3 flex justify-center text-white/90">${IRT.icon('refresh',34)}</p>
+       <p class="font-extrabold text-2xl text-white">ค่าอัปเกรด ${IRT.baht(IRT_CONFIG.UPGRADE_PRICE)}</p>
+       <p class="text-green-50 text-sm mt-1">ราคาพิเศษสำหรับลูกค้าเก่า</p>`;
+  }
+
+  /* ---------- ขั้นที่ 1: ค้นหา ---------- */
+  async function handleLookup() {
+    IRT.hideError();
+
+    const email       = document.getElementById('email').value.trim().toLowerCase();
+    const mt5         = document.getElementById('mt5').value.trim();
+    const tradingview = document.getElementById('tradingview').value.trim();
+
+    const eChk = IRT.validEmail(email);
+    if (!eChk.ok) return IRT.showError('อีเมล: ' + eChk.msg);
+
+    if (!mt5 && !tradingview) {
+      return IRT.showError('กรุณากรอกเลขบัญชี MT5 หรือ TradingView Username อย่างน้อย 1 อย่าง');
+    }
+
+    IRT.setLoading('submit-btn', true);
+    try {
+      const result = await IRT.send('lookup', { email, mt5, tradingview });
+
+      if (!result.found) {
+        IRT.setLoading('submit-btn', false);
+        return IRT.showError(
+          'ไม่พบข้อมูลการซื้อของคุณในระบบ — อาจใช้อีเมลคนละอันตอนซื้อ กรุณาติดต่อทีมงานทาง LINE'
+        );
+      }
+
+      foundCustomer = result.customer;
+      renderFound(result.customer);
+      document.getElementById('main-page').classList.add('hidden');
+      document.getElementById('found-page').classList.remove('hidden');
+      window.scrollTo(0, 0);
+
+    } catch (err) {
+      IRT.showError('เกิดข้อผิดพลาด: ' + err.message);
+      IRT.setLoading('submit-btn', false);
+    }
+  }
+
+  // true = ลูกค้าใช้เวอร์ชันล่าสุดอยู่แล้ว → ขอส่งอีเมลซ้ำ ไม่ใช่อัปเกรด
+  let isLatest = false;
+
+  function renderFound(c) {
+    const rows = [
+      ['ชื่อ',              c.name],
+      ['อีเมล',             c.email],
+      ['เลขบัญชี MT5',      c.mt5          || '—'],
+      ['TradingView',       c.tradingview  || '—'],
+      ['สินค้าที่ถือครอง',   c.product      || '—'],
+      ['เวอร์ชันปัจจุบัน',   c.version      || 'V.5.0'],
+      ['วันที่ซื้อ',         c.purchaseDate || '—']
+    ];
+    document.getElementById('found-details').innerHTML = rows.map(([k, v]) => `
+      <div class="flex justify-between items-center gap-4 p-3.5">
+        <span class="text-sm text-slate-500 flex-shrink-0">${k}</span>
+        <span class="font-semibold text-right break-all text-sm">${v}</span>
+      </div>`).join('');
+
+    isLatest = (c.version || '') === IRT_CONFIG.VERSION;
+    isLatest ? showLatestMode_(c) : showUpgradeMode_();
+  }
+
+  /* ---------- โหมด A: เวอร์ชันเก่ากว่า → อัปเกรดได้ ---------- */
+  function showUpgradeMode_() {
+    document.getElementById('found-title').textContent = 'เจอข้อมูลของคุณแล้ว!';
+    document.getElementById('found-sub').textContent   = 'กรุณาตรวจสอบความถูกต้องก่อนยืนยัน';
+    document.getElementById('confirm-btn').textContent = 'ยืนยัน — ขอรับเวอร์ชันใหม่';
+
+    document.getElementById('found-note').className = 'note note-amber mb-5';
+    document.getElementById('found-note').innerHTML =
+      `<p class="font-bold">${IRT.icon('alert', 15)}ข้อมูลไม่ถูกต้อง?</p>
+       <p class="mt-1">ถ้าเลขบัญชี MT5 หรือ TradingView ผิด <b>อย่ากดยืนยัน</b> — ติดต่อทีมงานทาง LINE เพื่อแก้ไขก่อน</p>`;
+  }
+
+  /* ---------- โหมด B: เวอร์ชันล่าสุดแล้ว → ส่งอีเมลซ้ำ ---------- */
+  function showLatestMode_(c) {
+    document.getElementById('found-title').textContent = 'คุณใช้เวอร์ชันล่าสุดอยู่แล้ว';
+    document.getElementById('found-sub').textContent   =
+      'ไม่ต้องอัปเกรด — หากหาอีเมลไม่เจอ กดปุ่มด้านล่างเพื่อให้ระบบส่งให้อีกครั้ง';
+    document.getElementById('confirm-btn').textContent = 'ส่งไฟล์ + License Key ให้อีกครั้ง';
+
+    document.getElementById('found-note').className = 'note note-blue mb-5';
+    document.getElementById('found-note').innerHTML =
+      `<p class="font-bold">${IRT.icon('mail', 15)}ระบบจะส่งไปที่อีเมลนี้เท่านั้น</p>
+       <p class="mt-1"><b>${c.email}</b><br>ส่งได้ทันที ไม่ต้องรอทีมงานตรวจสอบ</p>`;
+  }
+
+  /* ---------- ขั้นที่ 2: กดยืนยัน (แยก 2 โหมดอัตโนมัติ) ---------- */
+  async function handleConfirm() {
+    document.getElementById('found-error').classList.add('hidden');
+    IRT.setLoading('confirm-btn', true);
+    try {
+      if (isLatest) {
+        await IRT.send('resend', {
+          customerId: foundCustomer.customerId,
+          email:      foundCustomer.email
+        });
+        document.getElementById('done-title').textContent = 'ส่งอีเมลเรียบร้อย!';
+        document.getElementById('done-sub').textContent   = 'ระบบส่งไฟล์และ License Key ไปที่อีเมลของคุณแล้ว';
+      } else {
+        await IRT.send('upgrade', {
+          customerId: foundCustomer.customerId,
+          email:      foundCustomer.email,
+          toVersion:  IRT_CONFIG.VERSION
+        });
+        document.getElementById('done-title').textContent = 'ส่งคำขอเรียบร้อย!';
+        document.getElementById('done-sub').textContent   = 'ทีมงานจะส่งไฟล์และ License Key ใหม่ไปที่อีเมลของคุณ';
+      }
+
+      document.getElementById('success-email').textContent = foundCustomer.email;
+      document.getElementById('found-page').classList.add('hidden');
+      document.getElementById('success-page').classList.remove('hidden');
+      window.scrollTo(0, 0);
+
+    } catch (err) {
+      IRT.showError(err.message, 'found-error');
+      IRT.setLoading('confirm-btn', false);
+    }
+  }
+
+  IRT.bindCheck('email',       'email-hint', IRT.validEmail);
+  IRT.bindCheck('mt5',         'mt5-hint',   IRT.validMT5);
+  IRT.bindCheck('tradingview', 'tv-hint',    IRT.validTV);
+</script>
+
+</body>
+</html>

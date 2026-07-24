@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IRT GOLD PROGRAM</title>
+  <meta name="description" content="IRT GOLD Program สำหรับ XAUUSD ใช้ได้ทั้งคอมพิวเตอร์ (MT5) และมือถือ (TradingView)" />
+  <link rel="icon" href="assets/img/irt2.png" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="assets/js/config.js"></script>
+
+  <style>
+    /* เอฟเฟกต์เฉพาะหน้าหลัก */
+    .hero-home {
+      background:
+        radial-gradient(900px 420px at 50% -8%, rgba(201,162,39,.16), transparent 62%),
+        linear-gradient(168deg, #0b1830 0%, #14294c 46%, #1d3a68 100%);
+    }
+    .mark {
+      width: 92px; height: 92px;
+      border-radius: 24px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(201,162,39,.32);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .mark img { width: 54px; height: 54px; object-fit: contain; }
+
+    .h1-home {
+      font-size: clamp(2.1rem, 6vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.12;
+    }
+    .h1-gold {
+      background: linear-gradient(96deg, #f4e3a8 0%, #dcb85a 42%, #c9a227 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sec-head { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.25rem; }
+    .sec-head h2 { font-size: 1.2rem; font-weight: 700; white-space: nowrap; }
+    .sec-head .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-line), transparent); }
+
+    .pkg-price { font-size: 1.35rem; font-weight: 800; color: var(--navy-700); letter-spacing: -.02em; }
+  </style>
+</head>
+
+<body>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero-home text-white">
+  <div class="max-w-3xl mx-auto px-5 pt-14 pb-32 text-center">
+
+    <div class="mark mb-6">
+      <img src="assets/img/irt2.png" alt="IRT GOLD" />
+    </div>
+
+    <p class="eyebrow mb-5">OFFICIAL WEBSITE</p>
+
+    <h1 class="h1-home mb-5">
+      <span class="h1-gold">IRT GOLD</span> PROGRAM
+    </h1>
+
+    <p class="text-slate-300/85 text-base md:text-lg mb-3">
+      ใช้ได้ทั้งคอมพิวเตอร์ (MT5) และมือถือ (TradingView)
+    </p>
+
+    <p class="text-slate-400/70 text-sm">
+      เวอร์ชันล่าสุด <span id="hero-version" class="text-white/85 font-semibold"></span>
+    </p>
+
+    <hr class="gold-rule my-9" />
+
+    <div class="hero-stats">
+      <div class="hero-stat"><b id="stat-users">250+</b><span>ผู้ใช้งาน</span></div>
+      <div class="hero-stat"><b>2</b><span>แพลตฟอร์ม</span></div>
+      <div class="hero-stat"><b>24/7</b><span>ดูแลหลังการขาย</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="page-bg">
+  <div class="max-w-3xl mx-auto px-5 pb-16 -mt-20 relative z-10">
+
+    <!-- ===================== แพ็กเกจ ===================== -->
+    <section class="card p-6 md:p-8 mb-10">
+      <div class="sec-head">
+        <h2>แพ็กเกจ</h2>
+        <span class="line"></span>
+      </div>
+
+      <div id="pkg-list" class="grid grid-cols-1 gap-3.5"></div>
+
+      <hr class="gold-rule my-7" />
+
+      <p class="font-bold mb-4 text-sm">สิ่งที่คุณจะได้รับ</p>
+      <div id="perks" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3.5"></div>
+    </section>
+
+    <!-- ===================== เมนู ===================== -->
+    <section class="mb-10">
+      <div class="sec-head">
+        <h2>บริการลูกค้า</h2>
+        <span class="line"></span>
+      </div>
+      <div id="nav-list" class="grid grid-cols-1 gap-3"></div>
+    </section>
+
+    <!-- ===================== ติดต่อ ===================== -->
+    <section class="card p-7 text-center">
+      <p class="eyebrow mb-1" style="color:var(--gold-500)">CONTACT</p>
+      <p class="font-bold mb-6">ติดต่อทีมงาน</p>
+
+      <div id="contact-list" class="flex justify-center gap-3 flex-wrap"></div>
+    </section>
+  </div>
+
+  <footer class="gradient-bg text-white">
+    <div class="max-w-3xl mx-auto px-5 py-7 flex items-center justify-center gap-3">
+      <img src="assets/img/irt2.png" alt="IRT GOLD" class="w-8 h-8 rounded-lg opacity-90" />
+      <p class="text-slate-400/70 text-xs">© 2025 IRT GOLD · All rights reserved.</p>
+    </div>
+  </footer>
+</main>
+
+<script src="assets/js/form.js"></script>
+<script>
+  const C = IRT_CONFIG;
+
+  document.getElementById('hero-version').textContent = C.VERSION;
+
+  /* ---------- แพ็กเกจ ---------- */
+  const pkgList = document.getElementById('pkg-list');
+  Object.values(C.PACKAGES).forEach(p => {
+    const a = document.createElement('a');
+    a.href = 'register/';
+    a.className = 'pkg-card';
+    a.innerHTML = `
+      <div class="pkg-icon">${IRT.icon(p.icon, 26)}</div>
+      <div class="flex-1 min-w-0">
+        ${p.badge ? `<span class="badge-hot">${p.badge}</span>` : ''}
+        <p class="font-bold leading-tight">${p.name}</p>
+        <p class="text-xs text-slate-500 mt-1">${p.desc}</p>
+      </div>
+      <div class="text-right flex-shrink-0">
+        <p class="pkg-price">${IRT.baht(p.price)}</p>
+        <p class="text-[11px] text-slate-400">จ่ายครั้งเดียว</p>
+      </div>`;
+    pkgList.appendChild(a);
+  });
+
+  /* ---------- สิ่งที่ได้รับ ---------- */
+  const PERKS = [
+    'IRT GOLD Program พร้อมใช้งานทันที',
+    'License Key เฉพาะบัญชีของคุณ',
+    'คู่มือการติดตั้งและใช้งาน',
+    'อัปเดตเวอร์ชันใหม่ฟรี'
+  ];
+  document.getElementById('perks').innerHTML = PERKS.map(t =>
+    `<div class="perk">${IRT.icon('check', 17)}<span>${t}</span></div>`
+  ).join('');
+
+  /* ---------- เมนูบริการ ---------- */
+  const NAV = [
+    { href: 'register/', icon: 'cart',    title: 'ซื้อ / ลงทะเบียน',  desc: 'สำหรับลูกค้าใหม่' },
+    { href: 'update/',   icon: 'refresh', title: 'อัปเดตเวอร์ชัน',    desc: 'ลูกค้าเก่าอัปเกรดฟรี', tag: 'ฟรี' },
+    { href: 'check/',    icon: 'shield',  title: 'ตรวจสอบสถานะ',      desc: 'เช็คสถานะและ License Key' }
+  ];
+  document.getElementById('nav-list').innerHTML = NAV.map(n => `
+    <a href="${n.href}" class="nav-tile">
+      <span class="tile-icon">${IRT.icon(n.icon, 21)}</span>
+      <span class="flex-1 min-w-0">
+        <span class="block font-bold text-sm">
+          ${n.title}
+          ${n.tag ? `<span class="badge-hot ml-2" style="margin:0">${n.tag}</span>` : ''}
+        </span>
+        <span class="block text-xs text-slate-500 mt-0.5">${n.desc}</span>
+      </span>
+      <span class="tile-go">${IRT.icon('arrow', 18)}</span>
+    </a>`).join('');
+
+  /* ---------- ติดต่อ ---------- */
+  const CONTACTS = [
+    { href: C.CONTACT.line,             icon: 'line', label: 'LINE' },
+    { href: C.CONTACT.messenger,        icon: 'chat', label: 'Messenger' },
+    { href: 'mailto:' + C.CONTACT.email, icon: 'mail', label: 'อีเมล' }
+  ];
+  document.getElementById('contact-list').innerHTML = CONTACTS.map(c => `
+    <a href="${c.href}" target="_blank" rel="noopener"
+       class="nav-tile" style="flex:1;min-width:150px;justify-content:center;padding:1rem">
+      <span class="tile-icon">${IRT.icon(c.icon, 20)}</span>
+      <span class="font-semibold text-sm">${c.label}</span>
+    </a>`).join('');
+</script>
+
+</body>
+</html>
