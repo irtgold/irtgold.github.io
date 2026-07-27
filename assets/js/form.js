@@ -76,7 +76,7 @@ const IRT = {
     const s = String(v || '').trim();
     if (!s)                                            return { ok: false, msg: 'กรุณากรอกชื่อผู้ใช้ TradingView' };
     if (s.includes('@'))                               return { ok: false, msg: 'กรอก Username ไม่ใช่อีเมล (ไม่ต้องมี @)' };
-    if (!IRT_CONFIG.VALIDATION.TV_PATTERN.test(s))     return { ok: false, msg: 'ใช้ได้เฉพาะ a-z A-Z 0-9 และ _ ความยาว 3-25 ตัว' };
+    if (!IRT_CONFIG.VALIDATION.TV_PATTERN.test(s))     return { ok: false, msg: 'ใช้ได้เฉพาะ a-z A-Z 0-9 เครื่องหมาย _ และ - ความยาว 3-30 ตัว' };
     return { ok: true, msg: 'รูปแบบถูกต้อง' };
   },
 
