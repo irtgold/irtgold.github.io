@@ -416,19 +416,21 @@
     Object.keys(IRT_CONFIG.PACKAGES).forEach(key => {
       const p = IRT_CONFIG.PACKAGES[key];
       const el = document.createElement('div');
-      el.className = 'pkg-card' + (key === selectedPkg ? ' selected' : '');
+      el.className = 'pkg-card tier-' + (p.tier || 'plus') + (key === selectedPkg ? ' selected' : '');
       el.dataset.key = key;
       el.onclick = () => selectPackage(key);
       el.innerHTML = `
         <div class="pkg-icon">${IRT.icon(p.icon, 26)}</div>
         <div class="flex-1 min-w-0">
-          ${p.badge ? `<span class="badge-hot">${p.badge}</span>` : ''}
+          ${p.badge ? `<span class="badge-hot">${p.badge}</span>`
+                    : (p.label ? `<span class="badge-tier">${p.label}</span>` : '')}
           <p class="font-bold text-base leading-tight">${p.name}</p>
           <p class="text-xs text-slate-500 mt-0.5">${p.desc}</p>
         </div>
         <div class="text-right flex-shrink-0">
-          <p class="font-extrabold text-lg" style="color:var(--navy-700)">${IRT.baht(p.price)}</p>
+          <p class="pkg-price font-extrabold text-lg">${IRT.baht(p.price)}</p>
           <p class="text-[11px] text-slate-400">จ่ายครั้งเดียว</p>
+          ${p.note ? `<p class="pkg-note">${p.note}</p>` : ''}
         </div>`;
       list.appendChild(el);
     });

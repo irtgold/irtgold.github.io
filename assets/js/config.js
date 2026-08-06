@@ -14,16 +14,9 @@ const IRT_CONFIG = {
   VERSION: 'V.8.0',
 
   // ราคาแต่ละแพ็กเกจ — แก้ตรงนี้ที่เดียว
+  // เรียงจากถูกไปแพง : Mobile → PC → Combo
+  // tier กำหนดสีการ์ด : basic (เขียว) · plus (ฟ้า) · premium (ทอง)
   PACKAGES: {
-    pc: {
-      code:  'PC',
-      name:  'IRT GOLD PC V.8.0',
-      desc:  'สำหรับ MetaTrader 5 บนคอมพิวเตอร์',
-      price: 2990,
-      needMT5: true,
-      needTV:  false,
-      icon: 'monitor'
-    },
     mb: {
       code:  'MB',
       name:  'IRT GOLD Mobile V.8.0',
@@ -31,7 +24,20 @@ const IRT_CONFIG = {
       price: 2290,
       needMT5: false,
       needTV:  true,
-      icon: 'phone'
+      icon:  'phone',
+      tier:  'basic',
+      label: 'เริ่มต้น'
+    },
+    pc: {
+      code:  'PC',
+      name:  'IRT GOLD PC V.8.0',
+      desc:  'สำหรับ MetaTrader 5 บนคอมพิวเตอร์',
+      price: 2990,
+      needMT5: true,
+      needTV:  false,
+      icon:  'monitor',
+      tier:  'plus',
+      label: 'ยอดนิยม'
     },
     combo: {
       code:  'Combo',
@@ -40,8 +46,10 @@ const IRT_CONFIG = {
       price: 3590,
       needMT5: true,
       needTV:  true,
-      icon: 'devices',
-      badge: 'BEST SELLER'
+      icon:  'devices',
+      tier:  'premium',
+      badge: 'BEST SELLER',
+      note:  'ซื้อแยก ฿5,280 · ประหยัด ฿1,690'
     }
   },
 
