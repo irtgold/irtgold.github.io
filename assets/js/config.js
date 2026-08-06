@@ -19,7 +19,7 @@ const IRT_CONFIG = {
       code:  'PC',
       name:  'IRT GOLD PC V.8.0',
       desc:  'สำหรับ MetaTrader 5 บนคอมพิวเตอร์',
-      price: 3290,
+      price: 2990,
       needMT5: true,
       needTV:  false,
       icon: 'monitor'
@@ -28,7 +28,7 @@ const IRT_CONFIG = {
       code:  'MB',
       name:  'IRT GOLD Mobile V.8.0',
       desc:  'สำหรับ TradingView บนมือถือและเว็บ',
-      price: 3290,
+      price: 2290,
       needMT5: false,
       needTV:  true,
       icon: 'phone'
@@ -37,7 +37,7 @@ const IRT_CONFIG = {
       code:  'Combo',
       name:  'IRT GOLD PC + MB V.8.0',
       desc:  'ครบชุด ใช้ได้ทั้งคอมพิวเตอร์และมือถือ',
-      price: 3290,
+      price: 3590,
       needMT5: true,
       needTV:  true,
       icon: 'devices',
