@@ -70,8 +70,8 @@
     <label>เบอร์โทร <span class="req">*</span></label>
     <input id="phone" type="tel" inputmode="numeric" placeholder="08X-XXX-XXXX" autocomplete="tel">
 
-    <label>อีเมล</label>
-    <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
+    <label>อีเมล <span class="req">*</span></label>
+    <input id="email" type="email" placeholder="you@example.com" autocomplete="email" autocapitalize="off" spellcheck="false">
 
     <label>Telegram username <span class="req">*</span></label>
     <input id="username" placeholder="@your_username" autocapitalize="off" autocorrect="off" spellcheck="false">
@@ -102,6 +102,7 @@
     <p class="sub" id="doneMsg">กดปุ่มด้านล่างเพื่อเข้าห้องรับสัญญาณได้เลย</p>
     <a class="tglink" id="joinLink" href="#" target="_blank" rel="noopener">📲 เข้าห้องรับสัญญาณ</a>
     <ul class="steps">
+      <li>ลิงก์นี้เป็นของคุณคนเดียว ใช้ได้ครั้งเดียว และหมดอายุใน 24 ชม.</li>
       <li>กดเข้าห้องด้วย Telegram บัญชีเดียวกับ username ที่กรอกไว้</li>
       <li>ระบบจะทักต้อนรับและเริ่มนับ 3 วันทันทีที่เข้า</li>
       <li>รับสัญญาณครบทุกจังหวะ ไม่ต้องเฝ้าจอ</li>
@@ -131,8 +132,9 @@ document.getElementById('btn').addEventListener('click', async function () {
   if (digits.length < 9 || digits.length > 10 || digits[0] !== '0')
     return show('เบอร์โทรไม่ถูกต้อง กรุณากรอกให้ครบ 10 หลัก เช่น 0812345678');
 
-  if (v('email') && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email')))
-    return show('อีเมลไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง หรือเว้นว่างไว้ก็ได้ครับ');
+  if (!v('email')) return show('กรุณากรอกอีเมลครับ');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email')))
+    return show('อีเมลไม่ถูกต้อง กรุณาตรวจสอบอีกครั้งครับ');
 
   const u = v('username').replace(/^@/, '').toLowerCase();
   if (!u) return show('กรุณากรอก Telegram username ครับ');
