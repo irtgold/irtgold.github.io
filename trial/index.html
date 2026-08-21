@@ -74,8 +74,13 @@
     <input id="email" type="email" placeholder="you@example.com" autocomplete="email">
 
     <label>Telegram username <span class="req">*</span></label>
-    <input id="username" placeholder="@your_username">
-    <div class="hint">ดูได้ที่ Telegram → Settings → Username · ถ้ายังไม่มีให้ตั้งก่อนนะครับ ระบบใช้ยืนยันตัวตนตอนเข้าห้อง</div>
+    <input id="username" placeholder="@your_username" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <div class="hint">
+      ⚠️ ต้องเป็น <b>ชื่อผู้ใช้</b> ไม่ใช่ <b>ชื่อที่แสดง</b><br>
+      ✅ ถูก: <code>@somchai_99</code> &nbsp;&nbsp; ❌ ผิด: <code>@สมชาย ใจดี</code><br>
+      ดูได้ที่ Telegram → Settings → Username · ถ้ายังไม่มีให้ตั้งก่อนนะครับ
+      ระบบใช้ยืนยันตัวตนตอนเข้าห้อง ถ้าใส่ผิดจะจับคู่ข้อมูลไม่ได้
+    </div>
 
     <label>รู้จักเราจากช่องทางไหน</label>
     <select id="source">
@@ -117,11 +122,25 @@ document.getElementById('btn').addEventListener('click', async function () {
   const err = document.getElementById('err');
   const btn = document.getElementById('btn');
 
-  if (!v('name') || !v('phone') || !v('username')) {
-    err.textContent = 'กรุณากรอก ชื่อ · เบอร์โทร · Telegram username ให้ครบครับ';
-    err.style.display = 'block';
-    return;
-  }
+  // ── ตรวจข้อมูลก่อนส่ง ──
+  const show = m => { err.textContent = m; err.style.display = 'block'; };
+
+  if (v('name').length < 2) return show('กรุณากรอกชื่อ–นามสกุลให้ครบครับ');
+
+  const digits = v('phone').replace(/\D/g, '');
+  if (digits.length < 9 || digits.length > 10 || digits[0] !== '0')
+    return show('เบอร์โทรไม่ถูกต้อง กรุณากรอกให้ครบ 10 หลัก เช่น 0812345678');
+
+  if (v('email') && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v('email')))
+    return show('อีเมลไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง หรือเว้นว่างไว้ก็ได้ครับ');
+
+  const u = v('username').replace(/^@/, '').toLowerCase();
+  if (!u) return show('กรุณากรอก Telegram username ครับ');
+  if (/\s/.test(u))
+    return show('Telegram username ห้ามมีช่องว่างครับ — ต้องเป็น "ชื่อผู้ใช้" ไม่ใช่ "ชื่อที่แสดง" ดูที่ Telegram → Settings → Username');
+  if (!/^[a-z0-9_]{5,32}$/.test(u))
+    return show('Telegram username ไม่ถูกต้อง — ใช้ได้เฉพาะ a-z, 0-9 และ _ ยาว 5-32 ตัว');
+
   err.style.display = 'none';
   btn.disabled = true;
   btn.textContent = 'กำลังบันทึก...';
