@@ -122,6 +122,24 @@
 
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytr9sP5MWz-OqVXQxXONUTqZyxpMmVKLAEHtgu-zD6jknSsaMK8YQcODHiNq7cdOes/exec';
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+// ส่ง 1 ครั้ง — ได้คำตอบคืน JSON · คำตอบหายระหว่างทาง/ค้างนานเกิน 25 วิ โยน network
+// (เซิร์ฟเวอร์อาจบันทึกไปแล้วแต่คำตอบกลับมาไม่ถึง — เจอจริงกับมือถือเน็ตไม่นิ่ง)
+async function postOnce(fd) {
+  const ctl = ('AbortController' in window) ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), 25000) : null;
+  try {
+    const res = await fetch(SCRIPT_URL, { method: 'POST', body: fd, signal: ctl ? ctl.signal : undefined });
+    return await res.json();
+  } catch (e) {
+    const err = new Error('network');
+    err.network = true;
+    throw err;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
 
 document.getElementById('btn').addEventListener('click', async function () {
   const v = id => document.getElementById(id).value.trim();
@@ -152,33 +170,44 @@ document.getElementById('btn').addEventListener('click', async function () {
   btn.disabled = true;
   btn.textContent = 'กำลังบันทึก...';
 
-  let data;
-  try {
-    const fd = new FormData();
-    fd.append('program', 'pz7');          // ห้อง IRT POWER ZONE 7 วัน
-    fd.append('source', 'LINE');
-    fd.append('name', v('name'));
-    fd.append('phone', v('phone'));
-    fd.append('email', v('email'));
-    fd.append('username', v('username'));
-    const res = await fetch(SCRIPT_URL, { method: 'POST', body: fd });
-    data = await res.json();
-  } catch (e) {
+  const fd = new FormData();
+  fd.append('program', 'pz7');          // ห้อง IRT POWER ZONE 7 วัน
+  fd.append('source', 'LINE');
+  fd.append('name', v('name'));
+  fd.append('phone', v('phone'));
+  fd.append('email', v('email'));
+  fd.append('username', v('username'));
+
+  // คำตอบหาย → ส่งซ้ำอัตโนมัติ (สูงสุด 3 ครั้ง) เซิร์ฟเวอร์เจอเบอร์เดิมจะคืนลิงก์ให้ ไม่บันทึกซ้ำ
+  let data = null, retried = false;
+  for (let attempt = 1; attempt <= 3 && !data; attempt++) {
+    try {
+      data = await postOnce(fd);
+    } catch (e) {
+      if (attempt === 3) break;
+      retried = true;
+      btn.textContent = 'การเชื่อมต่อสะดุด กำลังลองใหม่...';
+      await wait(attempt * 2000);
+    }
+  }
+
+  if (!data) {
     reset();
-    return show('เชื่อมต่อไม่สำเร็จ กรุณาลองใหม่อีกครั้ง หรือทักแอดมินทาง LINE ได้เลยครับ');
+    return show('การเชื่อมต่อไม่เสถียร กดปุ่มลงทะเบียนอีกครั้งได้เลยครับ (ระบบไม่บันทึกซ้ำ) — ถ้ายังไม่ได้ ทักแอดมินทาง LINE');
   }
 
   // เซิร์ฟเวอร์ตอบกลับพร้อมเหตุผล เช่น เคยทดลองครบแล้ว — โชว์ตามนั้น
-  if (!data || !data.ok) {
+  if (!data.ok) {
     reset();
-    return show((data && data.error) || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง หรือทักแอดมินทาง LINE ครับ');
+    return show(data.error || 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง หรือทักแอดมินทาง LINE ครับ');
   }
 
   document.getElementById('form').style.display = 'none';
   document.getElementById('done').style.display = 'block';
   document.getElementById('joinLink').href = data.link;
   document.getElementById('rawLink').textContent = data.link;
-  if (data.repeat) {
+  // ส่งซ้ำเพราะเน็ตสะดุด เซิร์ฟเวอร์จะตอบว่า "เคยลงแล้ว" — ไม่ต้องบอกลูกค้า เพราะเพิ่งกดครั้งเดียว
+  if (data.repeat && !retried) {
     document.getElementById('doneMsg').textContent =
       'คุณเคยลงทะเบียนไว้แล้ว — นี่คือลิงก์ใหม่ของคุณ กดเข้าห้องได้เลยครับ';
   }
