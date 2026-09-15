@@ -214,12 +214,29 @@ const IRT = {
       if (data[k] !== undefined && data[k] !== null) payload.append(k, data[k]);
     });
 
-    const res = await fetch(IRT_CONFIG.SCRIPT_URL, { method: 'POST', body: payload });
-    if (!res.ok) throw new Error('เซิร์ฟเวอร์ไม่ตอบสนอง (HTTP ' + res.status + ')');
-
-    const result = await res.json();
+    // เน็ตหลุด / ไม่ได้คำตอบ (Safari ขึ้น "Load failed") → ติดธง network ไว้ให้หน้าเว็บจัดการต่อ
+    let result;
+    try {
+      const res = await fetch(IRT_CONFIG.SCRIPT_URL, { method: 'POST', body: payload });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      result = await res.json();
+    } catch (e) {
+      const err = new Error('การเชื่อมต่ออินเทอร์เน็ตขาดระหว่างส่งข้อมูล');
+      err.network = true;
+      throw err;
+    }
     if (!result.ok) throw new Error(result.error || 'ไม่สามารถบันทึกข้อมูลได้');
     return result;
+  },
+
+  // รหัสประจำการส่งแต่ละครั้ง — ให้เซิร์ฟเวอร์รู้ว่าเป็นคำขอเดิม ไม่บันทึกซ้ำ
+  newSubmitId() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+  },
+
+  wait(ms) {
+    return new Promise(r => setTimeout(r, ms));
   },
 
   /* ---------------- UI ทั่วไป ---------------- */

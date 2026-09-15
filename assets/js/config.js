@@ -79,7 +79,7 @@ const IRT_CONFIG = {
   VALIDATION: {
     MT5_MIN_DIGITS: 5,
     MT5_MAX_DIGITS: 12,
-    SLIP_MAX_MB:    5,
+    SLIP_MAX_MB:    10,
     TV_PATTERN:     /^[A-Za-z0-9_-]{3,30}$/   // TradingView username (มี - ได้ ยาวได้ถึง 30)
   },
 

@@ -300,7 +300,7 @@
             <div id="slip-placeholder" class="flex flex-col items-center justify-center py-6">
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center mb-3 shadow-lg group-hover:scale-110 transition text-white"><i data-icon="upload" data-size="24"></i></div>
               <p class="text-sm text-slate-600"><span class="font-bold text-blue-600">คลิกเพื่ออัปโหลด</span> หรือลากไฟล์มาวาง</p>
-              <p class="text-xs text-slate-400 mt-1">รองรับ JPG, PNG (สูงสุด 5MB)</p>
+              <p class="text-xs text-slate-400 mt-1">รองรับ JPG, PNG (สูงสุด 10MB)</p>
             </div>
             <div id="slip-preview-wrap" class="hidden w-full h-full p-2 relative">
               <img id="slip-preview" src="" alt="Slip preview" class="w-full h-full object-contain" />
@@ -322,6 +322,7 @@
     <button type="button" id="submit-btn" onclick="handleSubmit()" class="btn-primary pulse-glow">
       ยืนยันการลงทะเบียน
     </button>
+    <div id="sending-note" class="hidden note note-amber text-left mt-4 text-sm"></div>
     <p class="text-center text-xs text-slate-400 mt-4">การกดปุ่มยืนยันถือว่าท่านยอมรับเงื่อนไขการให้บริการ</p>
 
     <!-- ติดต่อ -->
@@ -504,9 +505,11 @@
     if (!IRT.slipFile) return IRT.showError('กรุณาแนบสลิปการโอนเงิน');
 
     IRT.setLoading('submit-btn', true);
+    setSending('กำลังส่งข้อมูล อาจใช้เวลา 10–30 วินาที · กรุณาอยู่หน้านี้ อย่าปิดหรือสลับไปแอปอื่นจนกว่าจะขึ้นหน้าสำเร็จ');
     try {
       const slipBase64 = await IRT.fileToBase64(IRT.slipFile);
-      const result = await IRT.send('new', {
+      const result = await sendNew({
+        submitId:    SUBMIT_ID,
         packageCode: p.code,
         packageName: p.name,
         price:       p.price,
@@ -532,9 +535,50 @@
       window.scrollTo(0, 0);
 
     } catch (err) {
-      IRT.showError('เกิดข้อผิดพลาดในการส่งข้อมูล: ' + err.message);
+      setSending('');
+      IRT.showError(err.network
+        ? 'การเชื่อมต่ออินเทอร์เน็ตไม่เสถียร กรุณากดยืนยันอีกครั้ง (ระบบจะไม่บันทึกซ้ำ) หากยังไม่ได้ กรุณาติดต่อทีมงาน'
+        : 'เกิดข้อผิดพลาดในการส่งข้อมูล: ' + err.message);
       IRT.setLoading('submit-btn', false);
     }
+  }
+
+  // รหัสเดียวต่อการเปิดหน้านี้ — ส่งซ้ำกี่ครั้งเซิร์ฟเวอร์ก็บันทึกแค่ครั้งเดียว
+  const SUBMIT_ID = IRT.newSubmitId();
+
+  function setSending(msg) {
+    const el = document.getElementById('sending-note');
+    el.textContent = msg;
+    el.classList.toggle('hidden', !msg);
+  }
+
+  // เน็ตหลุดระหว่างรอ → ถามเซิร์ฟเวอร์ก่อนว่าบันทึกแล้วหรือยัง ถ้ายังค่อยส่งใหม่ 1 ครั้ง
+  async function sendNew(data) {
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        return await IRT.send('new', data);
+      } catch (err) {
+        if (!err.network) throw err;
+        setSending('การเชื่อมต่อสะดุด กำลังตรวจสอบข้อมูล กรุณารอสักครู่...');
+        const saved = await checkSaved(data.submitId);
+        if (saved) return saved;
+        if (attempt === 2) throw err;
+        setSending('กำลังส่งข้อมูลอีกครั้ง กรุณาอยู่หน้านี้...');
+      }
+    }
+  }
+
+  async function checkSaved(submitId) {
+    for (let i = 0; i < 3; i++) {
+      await IRT.wait(i ? 3000 : 1500);
+      try {
+        const r = await IRT.send('confirm', { submitId });
+        return r.found ? r : null;
+      } catch (e) {
+        if (!e.network) return null;
+      }
+    }
+    return null;
   }
 
   /* ---------- สิ่งที่ได้รับ ---------- */
