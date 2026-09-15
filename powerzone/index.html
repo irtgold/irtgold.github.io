@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>ทดลองรับสัญญาณฟรี 7 วัน | IRT POWER ZONE</title>
-<meta name="description" content="ทดลองรับสัญญาณทอง XAUUSD ฟรี 7 วัน ครบ 4 ไทม์เฟรม M5 · M15 · M30 · H1 จุดเข้า Break Even TP1 TP2 TP3 และ SL เข้ามือถือทันทีที่เกิด" />
+<title>ทดลองรับสัญญาณฟรี 14 วัน | IRT POWER ZONE</title>
+<meta name="description" content="ทดลองรับสัญญาณทอง XAUUSD ฟรี 14 วัน ครบ 4 ไทม์เฟรม M5 · M15 · M30 · H1 จุดเข้า Break Even TP1 TP2 TP3 และ SL เข้ามือถือทันทีที่เกิด" />
 <link rel="icon" href="../assets/img/irt2.png" />
 
 <!-- Open Graph — การ์ดพรีวิวตอนแปะลิงก์ใน LINE / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://irtgold.github.io/powerzone/" />
-<meta property="og:title" content="ทดลองรับสัญญาณทองฟรี 7 วัน — IRT POWER ZONE" />
+<meta property="og:title" content="ทดลองรับสัญญาณทองฟรี 14 วัน — IRT POWER ZONE" />
 <meta property="og:description" content="ครบ 4 ไทม์เฟรม M5 · M15 · M30 · H1 · จุดเข้า · Break Even · TP1/2/3 · SL — ลงทะเบียนฟรี รับลิงก์เข้าห้องทันที" />
 <meta property="og:image" content="https://irtgold.github.io/assets/img/irt2.png" />
 <meta property="og:locale" content="th_TH" />
@@ -59,7 +59,7 @@
 <div class="hero">
   <img src="../assets/img/irt2.png" alt="IRT GOLD" class="logo" />
   <div class="brand">IRT POWER ZONE</div>
-  <h1>ทดลองรับสัญญาณทอง<br><span class="g">ฟรี 7 วัน</span></h1>
+  <h1>ทดลองรับสัญญาณทอง<br><span class="g">ฟรี 14 วัน</span></h1>
   <p class="sub">XAUUSD ครบ 4 ไทม์เฟรม · เข้ามือถือทันทีที่เกิด</p>
   <div class="tf"><span>M5</span><span>M15</span><span>M30</span><span>H1</span></div>
   <div class="badges">
@@ -95,7 +95,7 @@
       <a href="https://play.google.com/store/apps/details?id=org.telegram.messenger" target="_blank" rel="noopener">Android</a>
     </div>
 
-    <button id="btn" type="button">ลงทะเบียนรับสัญญาณฟรี 7 วัน</button>
+    <button id="btn" type="button">ลงทะเบียนรับสัญญาณฟรี 14 วัน</button>
     <div class="err" id="err"></div>
   </div>
 
@@ -109,7 +109,7 @@
     <ul class="steps">
       <li>ลิงก์นี้เป็นของคุณคนเดียว ใช้ได้ครั้งเดียว หมดอายุใน 24 ชม.</li>
       <li>ในแอป Telegram กด <b>Join Channel</b> เพื่อเข้าห้อง</li>
-      <li>เริ่มนับ 7 วันทันทีที่เข้า · เสาร์–อาทิตย์ไม่นับ เพราะตลาดปิด</li>
+      <li>เริ่มนับ 14 วันทันทีที่เข้า · เสาร์–อาทิตย์ไม่นับ เพราะตลาดปิด</li>
       <li>เปิดแจ้งเตือนห้องไว้ จะได้ไม่พลาดสัญญาณ</li>
       <li>ครบกำหนดระบบนำออกให้อัตโนมัติ · อยากรับต่อทักแอดมินทาง LINE</li>
     </ul>
@@ -176,7 +176,7 @@ document.getElementById('btn').addEventListener('click', async function () {
   const err = document.getElementById('err');
   const btn = document.getElementById('btn');
   const show = m => { err.textContent = m; err.style.display = 'block'; };
-  const reset = () => { btn.disabled = false; btn.textContent = 'ลงทะเบียนรับสัญญาณฟรี 7 วัน'; };
+  const reset = () => { btn.disabled = false; btn.textContent = 'ลงทะเบียนรับสัญญาณฟรี 14 วัน'; };
 
   // ── ตรวจข้อมูลก่อนส่ง ──
   const badName = nameProblem(v('name'));
@@ -201,7 +201,7 @@ document.getElementById('btn').addEventListener('click', async function () {
   btn.textContent = 'กำลังบันทึก...';
 
   const fd = new FormData();
-  fd.append('program', 'pz7');          // ห้อง IRT POWER ZONE 7 วัน
+  fd.append('program', 'pz7');          // ห้อง IRT POWER ZONE 14 วัน
   fd.append('source', 'LINE');
   fd.append('name', v('name'));
   fd.append('phone', v('phone'));
