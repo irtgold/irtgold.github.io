@@ -153,11 +153,12 @@ function phoneProblem(p) {
   return (up || down) ? 'เบอร์โทรไม่ถูกต้อง กรุณากรอกเบอร์จริงครับ' : '';
 }
 
-// ส่ง 1 ครั้ง — ได้คำตอบคืน JSON · คำตอบหายระหว่างทาง/ค้างนานเกิน 25 วิ โยน network
-// (เซิร์ฟเวอร์อาจบันทึกไปแล้วแต่คำตอบกลับมาไม่ถึง — เจอจริงกับมือถือเน็ตไม่นิ่ง)
+// ส่ง 1 ครั้ง — ได้คำตอบคืน JSON · คำตอบหาย / Google ตอบเป็นหน้า 404 / ค้างนานเกิน 40 วิ โยน network
+// (เซิร์ฟเวอร์บันทึกไปแล้วแต่คำตอบกลับมาไม่ถึง — เจอจริงกับมือถือเน็ตไม่นิ่ง และช่วงระบบเพิ่งอัปเดต
+//  คำขอแรก ๆ ช้า ~20 วิ แล้ว Google ส่งหน้า 404 กลับมาแทนคำตอบ · รอ 40 วิก่อนตัดสาย ไม่ให้ส่งซ้ำตอนงานแรกยังไม่เสร็จ)
 async function postOnce(fd) {
   const ctl = ('AbortController' in window) ? new AbortController() : null;
-  const timer = ctl ? setTimeout(() => ctl.abort(), 25000) : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), 40000) : null;
   try {
     const res = await fetch(SCRIPT_URL, { method: 'POST', body: fd, signal: ctl ? ctl.signal : undefined });
     return await res.json();
