@@ -347,24 +347,31 @@
 
 <!-- ============ หน้าสำเร็จ ============ -->
 <div id="success-page" class="hidden page-bg">
-  <div class="hero text-white pt-12 pb-24 px-4">
+  <div class="hero text-white pt-6 pb-20 px-4">
     <div class="max-w-lg mx-auto text-center">
-      <div class="hero-badge mb-3"><img src="../assets/img/irt2.png" alt="IRT GOLD" /></div>
-      <p class="hero-brand">IRT GOLD</p>
+      <div class="brand-logo"><div class="crop"><img src="../assets/img/irt.png" alt="IRT GOLD — สร้างจังหวะให้การเทรด" /></div></div>
     </div>
   </div>
 
   <div class="max-w-lg mx-auto px-4 pb-14 -mt-16 relative z-10">
     <div class="card p-8 text-center">
-      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 text-green-700"><i data-icon="check" data-size="38"></i></div>
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-700"><i data-icon="check" data-size="32"></i></div>
       <h2 class="text-2xl font-bold mb-1">ลงทะเบียนสำเร็จ!</h2>
       <p class="text-slate-500 mb-6">เราได้รับข้อมูลของคุณเรียบร้อยแล้ว</p>
 
-      <div id="ref-box" class="hidden bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl p-4 mb-6">
+      <div id="ref-box" class="hidden bg-slate-50 border-2 border-dashed border-slate-300 rounded-xl p-4 mb-5">
         <p class="text-xs text-slate-500 mb-1">รหัสอ้างอิงของคุณ</p>
         <p id="success-ref" class="text-2xl font-extrabold tracking-wider"></p>
-        <p class="text-xs text-slate-400 mt-1">เก็บไว้ใช้ตอนติดต่อทีมงาน</p>
+        <!-- ให้ลูกค้าแคปจอแรกแล้วติดทั้งรหัสและข้อความนี้ -->
+        <div class="snap-note">
+          <i data-icon="alert" data-size="18"></i>
+          <span><b>แคปหน้าจอนี้</b> แล้วส่งให้ทีมงานทาง LINE (Admin หรือ Support) เพื่อยืนยันการลงทะเบียน</span>
+        </div>
       </div>
+
+      <a id="line-btn" href="#" target="_blank" rel="noopener" class="btn-line mb-6">
+        <i data-icon="line" data-size="20"></i>ส่งให้ทีมงานทาง LINE
+      </a>
 
       <div class="steps mb-8">
         <div class="step on"><div class="step-dot done">1</div><p class="step-label">แจ้งโอน</p></div>
@@ -397,6 +404,7 @@
     document.getElementById('bank-acc-name').textContent = C.BANK.accountName;
     document.getElementById('qr-name').textContent       = C.BANK.qrName;
     document.getElementById('purchaseDate').value = IRT.today();
+    document.getElementById('line-btn').href = C.CONTACT.line;
 
     document.getElementById('contact-list').innerHTML = [
       { href: C.CONTACT.line,              icon: 'line', label: 'LINE' },

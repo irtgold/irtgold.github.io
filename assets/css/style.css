@@ -860,3 +860,32 @@ body {
 
   .nav-tile { padding: 1.1rem 1.15rem; }
 }
+
+/* ---------- หน้าลงทะเบียนสำเร็จ ---------- */
+
+/* โลโก้เต็ม — irt.png เป็นภาพ 500×500 พื้นโปร่งใส มีขอบว่างเยอะ ตัดเฉพาะตัวโลโก้ แล้ววางบนป้ายขาว */
+.brand-logo {
+  display: inline-block; background: #fff; border-radius: 14px;
+  padding: .55rem .9rem; box-shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+.brand-logo .crop { width: 222px; height: 68px; overflow: hidden; }
+.brand-logo img   { width: 250px; max-width: none; margin: -98px 0 0 -14px; display: block; }
+
+/* ข้อความเตือนให้แคปหน้าจอส่งทีมงาน */
+.snap-note {
+  display: flex; align-items: flex-start; justify-content: center; gap: .5rem;
+  margin-top: .75rem; padding: .7rem .8rem; border-radius: 10px;
+  background: #fff4d1; border: 1px solid #f0cf6b; color: #7a4d00;
+  font-size: .88rem; line-height: 1.5; text-align: left;
+}
+.snap-note .ico, .snap-note svg { flex-shrink: 0; margin-top: .1rem; color: #b7791f; }
+.snap-note b { color: #5c3a00; }
+
+/* ปุ่ม LINE */
+.btn-line {
+  display: flex; align-items: center; justify-content: center; gap: .55rem;
+  width: 100%; padding: .95rem 1rem; border-radius: 12px;
+  background: #06c755; color: #fff; font-weight: 800; font-size: 1rem;
+  box-shadow: 0 8px 20px rgba(6,199,85,.25); transition: filter .15s;
+}
+.btn-line:hover { filter: brightness(1.05); }
