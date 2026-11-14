@@ -144,8 +144,12 @@
         ['สินค้า',          c.product      || '—'],
         ['เวอร์ชัน',        c.version      || '—'],
         ['วันที่ลงทะเบียน',  c.registerDate || '—'],
-        ['วันหมดอายุ',      c.expiryDate   || '—']
+        ['License หมดอายุ', c.expiryDate   || '—']
       ];
+      // เว็บ IRT GOLD LAB (ระบบใหม่ส่ง labExpiryDate มาด้วย · ถ้าไม่มีฟิลด์นี้ = ระบบเก่า ไม่แสดงแถว)
+      if (c.labExpiryDate !== undefined) {
+        rows.push(['เว็บ IRT GOLD LAB หมดอายุ', c.labExpiryDate || 'ยังไม่มีสิทธิ์เว็บ · สนใจติดต่อทีมงานทาง LINE']);
+      }
       // แสดง Key เฉพาะ 4 ตัวท้าย เพื่อความปลอดภัย
       if (c.licenseKeyMasked) rows.push(['License Key', c.licenseKeyMasked]);
 
