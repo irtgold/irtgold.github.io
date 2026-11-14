@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>อัปเดตเวอร์ชัน | IRT GOLD V.8.0</title>
-  <meta name="description" content="ลูกค้าเก่า IRT GOLD อัปเดตเป็นเวอร์ชัน 8.0 ฟรี" />
+  <meta name="description" content="ลูกค้าเก่า IRT GOLD อัปเดตเป็นเวอร์ชัน 8.0 + เว็บ IRT GOLD LAB ใช้ฟรี 1 ปี ในราคา 890 บาท" />
   <link rel="icon" href="../assets/img/irt2.png" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -34,15 +34,15 @@
       <div class="steps">
         <div class="step on"><div class="step-dot current">1</div><p class="step-label">ยืนยันตัวตน</p></div>
         <div class="step"><div class="step-dot todo">2</div><p class="step-label">ตรวจสอบข้อมูล</p></div>
-        <div class="step"><div class="step-dot todo">3</div><p class="step-label">รับ Key ใหม่</p></div>
+        <div class="step"><div class="step-dot todo">3</div><p class="step-label">ชำระ + รับ Key</p></div>
       </div>
     </div>
 
-    <!-- แจ้งฟรี -->
+    <!-- ราคาอัปเดต -->
     <div id="free-banner" class="card p-6 text-center mb-5" style="background:linear-gradient(135deg,#16a34a 0%,#15803d 100%);border:none">
       <p class="mb-3 flex justify-center text-white/90"><i data-icon="star" data-size="34"></i></p>
-      <p class="font-extrabold text-2xl text-white">อัปเดตฟรี!</p>
-      <p class="text-green-50 text-sm mt-1">ลูกค้าเก่าอัปเกรดเป็น <span id="ver-label"></span> ไม่มีค่าใช้จ่าย</p>
+      <p class="font-extrabold text-2xl text-white">อัปเดตเป็น <span id="ver-label"></span> + เว็บ LAB</p>
+      <p class="text-green-50 text-sm mt-1">ราคาพิเศษลูกค้าเก่า <span id="upg-price" class="font-extrabold"></span> · เว็บ IRT GOLD LAB ใช้ฟรี 1 ปี</p>
     </div>
 
     <!-- ฟอร์ม -->
@@ -141,6 +141,44 @@
         <p class="mt-1">ถ้าเลขบัญชี MT5 หรือ TradingView ผิด <b>อย่ากดยืนยัน</b> — ติดต่อทีมงานทาง LINE เพื่อแก้ไขก่อน</p>
       </div>
 
+      <!-- ชำระเงิน (เฉพาะโหมดอัปเกรด) -->
+      <div id="pay-block" class="hidden mb-5">
+        <div class="gradient-bg rounded-xl p-5 text-white text-center mb-4">
+          <p class="text-blue-200/70 text-sm mb-1">ยอดที่ต้องโอน</p>
+          <p id="pay-price" class="text-4xl font-extrabold tracking-tight">—</p>
+          <p class="text-blue-200/80 text-sm mt-2">IRT GOLD PC V.8.0 + เว็บ IRT GOLD LAB 1 ปี<br>(ถ้ามีบัญชีเว็บอยู่แล้ว ต่ออายุเว็บให้อีก 1 ปี ไม่ต้องสมัครใหม่)</p>
+        </div>
+        <div class="rounded-xl overflow-hidden border border-green-200 mb-4">
+          <div class="bg-white p-4">
+            <p class="text-xs text-slate-500 mb-1"><span id="bank-name"></span> · ชื่อบัญชี <span id="bank-acc-name"></span></p>
+            <div class="flex items-center justify-between bg-green-50 rounded-lg p-3 border border-green-100 mb-3">
+              <p class="text-xl font-extrabold tracking-wider" id="bank-acc"></p>
+              <button type="button" id="copy-btn" onclick="copyAccount()" class="copy-btn bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition shadow-sm">คัดลอก</button>
+            </div>
+            <div class="text-center">
+              <div class="w-40 h-40 mx-auto mb-2 rounded-2xl shadow-lg overflow-hidden border-4 border-white bg-white"><img id="qr-img" src="" alt="QR Code ชำระเงิน" class="w-full h-full object-contain p-1" /></div>
+              <p class="text-xs text-red-600 font-bold">โอนเข้าชื่อ <span id="qr-name"></span> เท่านั้น</p>
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="lbl">เลขบัญชี MT5 ที่จะใช้กับ V.8.0 <span class="text-slate-400 font-normal">(เว้นว่าง = ใช้เลขเดิมที่แสดงด้านบน)</span></label>
+          <input type="text" id="upg-mt5" inputmode="numeric" class="inp" placeholder="เลขบัญชี MT5" />
+        </div>
+        <div>
+          <label class="lbl">แนบสลิปโอนเงิน <span class="text-red-500">*</span></label>
+          <label class="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-blue-300 rounded-xl cursor-pointer bg-blue-50/60 hover:bg-blue-50 transition overflow-hidden">
+            <div id="slip-placeholder" class="flex flex-col items-center justify-center py-4">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center mb-2 shadow-lg text-white"><i data-icon="upload" data-size="22"></i></div>
+              <p class="text-sm text-slate-600"><span class="font-bold text-blue-600">คลิกเพื่ออัปโหลด</span> สลิป</p>
+              <p class="text-xs text-slate-400 mt-1">รองรับ JPG, PNG</p>
+            </div>
+            <div id="slip-preview-wrap" class="hidden w-full h-full p-2"><img id="slip-preview" src="" alt="Slip preview" class="w-full h-full object-contain" /></div>
+            <input type="file" id="slipFile" class="hidden" accept="image/*" onchange="IRT.handleSlip(this, { onError: m => IRT.showError(m, 'found-error') })" />
+          </label>
+        </div>
+      </div>
+
       <div id="found-error" class="hidden mb-4 p-4 bg-red-50 text-red-700 rounded-xl border border-red-200 text-sm"></div>
 
       <button type="button" id="confirm-btn" onclick="handleConfirm()" class="btn-primary btn-green">
@@ -172,7 +210,7 @@
     <div class="card p-8 text-center">
       <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 text-green-700"><i data-icon="check" data-size="38"></i></div>
       <h2 id="done-title" class="text-2xl font-bold mb-1">ส่งคำขอเรียบร้อย!</h2>
-      <p id="done-sub" class="text-slate-500 mb-6">ทีมงานจะส่งไฟล์และ License Key ใหม่ไปที่อีเมลของคุณ</p>
+      <p id="done-sub" class="text-slate-500 mb-6">ทีมงานจะตรวจสลิป แล้วส่งไฟล์และ License Key ใหม่ไปที่อีเมลของคุณ</p>
 
       <div class="note note-blue text-left mb-6">
         <p class="font-bold mb-1"><i data-icon="mail" data-size="15"></i>อีเมลปลายทาง</p>
@@ -194,13 +232,16 @@
   document.getElementById('ver-label').textContent = IRT_CONFIG.VERSION;
   document.getElementById('c-line').href = IRT_CONFIG.CONTACT.line;
 
-  // ถ้าตั้งค่าให้อัปเกรดมีค่าใช้จ่าย ให้เปลี่ยนแบนเนอร์
-  if (IRT_CONFIG.UPGRADE_PRICE > 0) {
-    document.getElementById('free-banner').innerHTML =
-      `<p class="mb-3 flex justify-center text-white/90">${IRT.icon('refresh',34)}</p>
-       <p class="font-extrabold text-2xl text-white">ค่าอัปเกรด ${IRT.baht(IRT_CONFIG.UPGRADE_PRICE)}</p>
-       <p class="text-green-50 text-sm mt-1">ราคาพิเศษสำหรับลูกค้าเก่า</p>`;
-  }
+  // ราคาอัปเกรด + ข้อมูลธนาคาร (ตั้งที่ config.js)
+  const UPG = IRT_CONFIG.UPGRADE_PRICE;
+  document.getElementById('upg-price').textContent = IRT.baht(UPG);
+  document.getElementById('pay-price').textContent = IRT.baht(UPG);
+  document.getElementById('bank-name').textContent     = IRT_CONFIG.BANK.name;
+  document.getElementById('bank-acc').textContent      = IRT_CONFIG.BANK.accountNo;
+  document.getElementById('bank-acc-name').textContent = IRT_CONFIG.BANK.accountName;
+  document.getElementById('qr-name').textContent       = IRT_CONFIG.BANK.qrName;
+  document.getElementById('qr-img').src                = '../assets/img/' + IRT_CONFIG.BANK.qr;
+  function copyAccount() { IRT.copyText(IRT_CONFIG.BANK.accountRaw, 'copy-btn', 'คัดลอกแล้ว!'); }
 
   /* ---------- ขั้นที่ 1: ค้นหา ---------- */
   async function handleLookup() {
@@ -267,7 +308,8 @@
   function showUpgradeMode_() {
     document.getElementById('found-title').textContent = 'เจอข้อมูลของคุณแล้ว!';
     document.getElementById('found-sub').textContent   = 'กรุณาตรวจสอบความถูกต้องก่อนยืนยัน';
-    document.getElementById('confirm-btn').textContent = 'ยืนยัน — ขอรับเวอร์ชันใหม่';
+    document.getElementById('confirm-btn').textContent = 'ส่งคำขออัปเกรด ' + IRT.baht(UPG);
+    document.getElementById('pay-block').classList.remove('hidden');
 
     document.getElementById('found-note').className = 'note note-amber mb-5';
     document.getElementById('found-note').innerHTML =
@@ -281,6 +323,7 @@
     document.getElementById('found-sub').textContent   =
       'ไม่ต้องอัปเกรด — หากหาอีเมลไม่เจอ กดปุ่มด้านล่างเพื่อให้ระบบส่งให้อีกครั้ง';
     document.getElementById('confirm-btn').textContent = 'ส่งไฟล์ + License Key ให้อีกครั้ง';
+    document.getElementById('pay-block').classList.add('hidden');
 
     document.getElementById('found-note').className = 'note note-blue mb-5';
     document.getElementById('found-note').innerHTML =
@@ -301,13 +344,20 @@
         document.getElementById('done-title').textContent = 'ส่งอีเมลเรียบร้อย!';
         document.getElementById('done-sub').textContent   = 'ระบบส่งไฟล์และ License Key ไปที่อีเมลของคุณแล้ว';
       } else {
-        await IRT.send('upgrade', {
+        if (!IRT.slipFile) throw new Error('กรุณาแนบสลิปโอนเงิน ' + IRT.baht(UPG));
+        const mt5New = document.getElementById('upg-mt5').value.trim().replace(/\s/g, '');
+        if (mt5New && !/^\d{5,12}$/.test(mt5New)) throw new Error('เลขบัญชี MT5 ต้องเป็นตัวเลข 5-12 หลัก');
+        const slipBase64 = await IRT.fileToBase64(IRT.slipFile);
+        await IRT.send('upg890', {
           customerId: foundCustomer.customerId,
           email:      foundCustomer.email,
-          toVersion:  IRT_CONFIG.VERSION
+          mt5:        mt5New || foundCustomer.mt5 || '',
+          slipBase64,
+          slipName:   IRT.slipFile.name,
+          slipType:   IRT.slipFile.type
         });
         document.getElementById('done-title').textContent = 'ส่งคำขอเรียบร้อย!';
-        document.getElementById('done-sub').textContent   = 'ทีมงานจะส่งไฟล์และ License Key ใหม่ไปที่อีเมลของคุณ';
+        document.getElementById('done-sub').textContent   = 'ทีมงานจะตรวจสลิป แล้วส่งไฟล์ + License Key V.8.0 พร้อมเปิดเว็บ IRT GOLD LAB 1 ปี ไปที่อีเมลของคุณ';
       }
 
       document.getElementById('success-email').textContent = foundCustomer.email;

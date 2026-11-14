@@ -6,9 +6,9 @@
 const IRT_CONFIG = {
 
   /* ---------- Backend (Google Apps Script Web App) ---------- */
-  // Apps Script : "IRT GOLD — Master API"
+  // Apps Script : "IRT GOLD — Master v2" (สลับจาก Master API เดิม 14 พ.ย. 69 · ย้อนกลับ = ใส่ URL เดิม AKfycbzt7UQx8lCPzwqX9EGJL_j7HatOIpTziZJGkHaYRWZn13osTPKiKEdJ1f6RgMIpf0H-Dg)
   // แก้โค้ดแล้วให้ Deploy → Manage deployments → แก้ deployment เดิม (URL จะได้ไม่เปลี่ยน)
-  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzt7UQx8lCPzwqX9EGJL_j7HatOIpTziZJGkHaYRWZn13osTPKiKEdJ1f6RgMIpf0H-Dg/exec',
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxsCD-l1vEfcT0hxODYvE1PHL8TMBegYgnkpB_8ymzh11vwwpDdohFzCe-7LckVw1KUtQ/exec',
 
   /* ---------- Product & Version ---------- */
   VERSION: 'V.8.0',
@@ -56,8 +56,8 @@ const IRT_CONFIG = {
     }
   },
 
-  // ค่าอัปเกรดสำหรับลูกค้าเก่า (0 = ฟรี)
-  UPGRADE_PRICE: 0,
+  // ค่าอัปเกรดลูกค้าเก่า V.5.0 → V.8.0 + เว็บ IRT GOLD LAB 1 ปี (14 พ.ย. 69)
+  UPGRADE_PRICE: 890,
 
   /* ---------- ข้อมูลการชำระเงิน ---------- */
   BANK: {
