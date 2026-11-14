@@ -32,7 +32,7 @@ const IRT_CONFIG = {
     pc: {
       code:  'PC',
       name:  'IRT GOLD PC V.8.0',
-      desc:  'โปรแกรมช่วยเทรดบน MT5 พร้อมสัญญาณ BUY/SELL + IRT GOLD LAB เว็บไซต์ ใช้ฟรี 1 ปี',
+      desc:  'โปรแกรม MT5 พร้อมสัญญาณ BUY/SELL + เว็บ IRT GOLD LAB ใช้ฟรี 1 ปี',
       price: 3290,
       needMT5: true,
       needTV:  false,
