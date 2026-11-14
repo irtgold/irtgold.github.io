@@ -378,7 +378,7 @@
 
       <div class="note note-blue text-left mb-6">
         <p class="font-bold mb-1"><i data-icon="info" data-size="15"></i>สิ่งที่ต้องทำตอนนี้</p>
-        <p>ทีมงานกำลังตรวจสอบสลิปของคุณ (~15-60 นาที) เมื่อเรียบร้อยแล้ว ระบบจะส่ง <b>License Key</b> และ <b>คู่มือติดตั้ง</b> ไปยังอีเมล:</p>
+        <p>ทีมงานกำลังตรวจสอบสลิปของคุณ (~15-60 นาที) เมื่อเรียบร้อยแล้ว ระบบจะส่ง <b>License Key</b> และ <b>คู่มือติดตั้ง</b> ไปยังอีเมล พร้อมแจ้งวิธีเข้าใช้ IRT GOLD LAB ฟรี 1 ปี:</p>
         <p id="success-email" class="font-bold mt-2 break-all"></p>
       </div>
 
@@ -389,7 +389,7 @@
 
 <script src="../assets/js/form.js"></script>
 <script>
-  let selectedPkg = 'combo';
+  let selectedPkg = 'pc';
 
   /* ---------- เติมข้อมูลจาก config ---------- */
   function fillStatic() {
@@ -419,7 +419,7 @@
   function renderPackages() {
     const list = document.getElementById('pkg-list');
     list.innerHTML = '';
-    Object.keys(IRT_CONFIG.PACKAGES).forEach(key => {
+    Object.keys(IRT_CONFIG.PACKAGES).filter(k => !IRT_CONFIG.PACKAGES[k].hidden).forEach(key => {
       const p = IRT_CONFIG.PACKAGES[key];
       const el = document.createElement('div');
       el.className = 'pkg-card tier-' + (p.tier || 'plus') + (key === selectedPkg ? ' selected' : '');
@@ -589,10 +589,14 @@
   /* ---------- สิ่งที่ได้รับ ---------- */
   function renderPerks() {
     const perks = [
-      'IRT GOLD Program พร้อมใช้งานทันที',
+      'IRT GOLD PC V8.0 โปรแกรมช่วยเทรดบน MT5 พร้อมสัญญาณ BUY/SELL',
+      'IRT GOLD LAB เว็บไซต์ ใช้ฟรี 1 ปีเต็ม (หมดแล้วทักทีมงานต่ออายุได้)',
       'License Key เฉพาะบัญชีของคุณ',
-      'คู่มือการติดตั้งและใช้งาน',
-      'อัปเดตเวอร์ชันใหม่ฟรี'
+      'ทีมงานรีโมทติดตั้งโปรแกรม MT5 ให้',
+      'ตั้งค่าโปรแกรมพร้อมใช้งาน',
+      'คลิปสอนการใช้งาน',
+      'ซัพพอร์ตหลังติดตั้ง',
+      'ช่องทางแจ้งเตือนและกลุ่มให้คำปรึกษาตามแพ็กเกจ'
     ];
     document.getElementById('perks').innerHTML = perks.map(t =>
       `<div class="perk">${IRT.icon('check', 17)}<span>${t}</span></div>`

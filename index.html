@@ -136,7 +136,7 @@
 
   /* ---------- แพ็กเกจ ---------- */
   const pkgList = document.getElementById('pkg-list');
-  Object.values(C.PACKAGES).forEach(p => {
+  Object.values(C.PACKAGES).filter(p => !p.hidden).forEach(p => {
     const a = document.createElement('a');
     a.href = 'register/';
     a.className = 'pkg-card tier-' + (p.tier || 'plus');

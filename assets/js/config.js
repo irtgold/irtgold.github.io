@@ -18,6 +18,7 @@ const IRT_CONFIG = {
   // tier กำหนดสีการ์ด : basic (เขียว) · plus (ฟ้า) · premium (ทอง)
   PACKAGES: {
     mb: {
+      hidden: true,        // ยกเลิกขาย (เปลี่ยนจาก TradingView เป็น IRT GOLD LAB · 14 พ.ย. 69) — คงไว้เพื่อลูกค้าเก่า
       code:  'MB',
       name:  'IRT GOLD Mobile V.8.0',
       desc:  'สำหรับ TradingView บนมือถือและเว็บ',
@@ -31,15 +32,17 @@ const IRT_CONFIG = {
     pc: {
       code:  'PC',
       name:  'IRT GOLD PC V.8.0',
-      desc:  'สำหรับ MetaTrader 5 บนคอมพิวเตอร์',
+      desc:  'โปรแกรมช่วยเทรดบน MT5 พร้อมสัญญาณ BUY/SELL + IRT GOLD LAB เว็บไซต์ ใช้ฟรี 1 ปี',
       price: 3290,
       needMT5: true,
       needTV:  false,
-      icon:  'monitor',
-      tier:  'plus',
-      label: 'ยอดนิยม'
+      icon:  'devices',
+      tier:  'premium',
+      badge: 'ได้ทั้ง 2 ระบบ',
+      note:  'IRT GOLD LAB มูลค่ารายปี รับฟรี · ต่ออายุทักทีมงาน'
     },
     combo: {
+      hidden: true,        // รวมเข้าแพ็กเกจ PC แล้ว (เว็บแถมฟรี 1 ปี)
       code:  'Combo',
       name:  'IRT GOLD PC + MB V.8.0',
       desc:  'ครบชุด ใช้ได้ทั้งคอมพิวเตอร์และมือถือ',
