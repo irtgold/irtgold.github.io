@@ -36,6 +36,7 @@ const IRT_CONFIG = {
       price: 3290,
       needMT5: true,
       needTV:  false,
+      optTV:   true,       // ช่อง TradingView กลับมา (ไม่บังคับ) · 22 พ.ย. 69
       icon:  'devices',
       tier:  'premium',
       badge: 'ได้ทั้ง 2 ระบบ',

@@ -170,7 +170,7 @@
 
         <!-- ---------- TradingView ---------- -->
         <div id="block-tv" class="pt-2">
-          <label class="lbl">ชื่อผู้ใช้ TradingView <span class="text-red-500">*</span></label>
+          <label class="lbl">ชื่อผู้ใช้ TradingView <span class="text-red-500" id="tv-req">*</span><span class="optional" id="tv-opt" style="display:none">ไม่บังคับ</span></label>
           <input type="text" id="tradingview" autocomplete="off"
             class="inp inp-center" placeholder="IRTGOLD" />
           <p id="tv-hint" class="field-hint text-center"></p>
@@ -454,7 +454,9 @@
   function applyPackageRules() {
     const p = IRT_CONFIG.PACKAGES[selectedPkg];
     document.getElementById('block-mt5').classList.toggle('hidden', !p.needMT5);
-    document.getElementById('block-tv').classList.toggle('hidden',  !p.needTV);
+    document.getElementById('block-tv').classList.toggle('hidden',  !(p.needTV || p.optTV));
+    document.getElementById('tv-req').style.display = p.needTV ? '' : 'none';
+    document.getElementById('tv-opt').style.display = p.needTV ? 'none' : '';
     document.getElementById('total-price').textContent = IRT.baht(p.price);
     document.getElementById('total-pkg').textContent   = p.name;
   }
@@ -502,7 +504,7 @@
       if (mt5 !== mt5Confirm) return IRT.showError('เลขบัญชี MT5 ทั้งสองช่องไม่ตรงกัน กรุณาตรวจสอบอีกครั้ง');
     }
 
-    if (p.needTV) {
+    if (p.needTV || (p.optTV && tradingview)) {
       const tChk = IRT.validTV(tradingview);
       if (!tChk.ok) return IRT.showError('TradingView: ' + tChk.msg);
     }
@@ -522,7 +524,7 @@
         fullName, email, phone, lineId,
         mt5:         p.needMT5 ? mt5 : '',
         broker:      p.needMT5 ? broker : '',
-        tradingview: p.needTV  ? tradingview : '',
+        tradingview: (p.needTV || p.optTV) ? tradingview : '',
         purchaseDate,
         slipBase64,
         slipName:    IRT.slipFile.name,
